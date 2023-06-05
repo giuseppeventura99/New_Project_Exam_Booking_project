@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Server
 {
     ArrayList<Person> list = new ArrayList<>();
-    PeriodicPrinter pp = new PeriodicPrinter();
+   /* PeriodicPrinter pp = new PeriodicPrinter();
     public synchronized ArrayList<Person> getList() {
         // first solution to the concurrent modification exception potentially happening
         // in the client manager when doing the for loop for printing the list
@@ -81,7 +81,7 @@ public class Server
             }
         }
 
-    }
+    }*/
 
     public static void main(String[] args) {
 

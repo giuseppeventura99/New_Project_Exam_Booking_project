@@ -24,9 +24,9 @@ public class Client
             var sc = new Scanner(is);
             var pw = new PrintWriter(os);
             var input = new Scanner(System.in);
-            String choise =" ";
+            String choose ="";
             //we can create the MENU
-            while(!choise.equals("q"))
+            while(!choose.equals("q"))
             {
                 System.out.println("1-Add an user:");
                 System.out.println("2-Book an Hotel");
@@ -35,8 +35,8 @@ public class Client
                 System.out.println("q-Exit");
                 System.out.println("------------------------------------------------");
                 System.out.println("Select you choose:");
-                choise= input.nextLine();
-                switch(choise)
+                var InputCommand= input.nextLine();
+                switch(InputCommand)
                 {
                     case "1":
                         //add an user
@@ -44,7 +44,7 @@ public class Client
                         String l_or_r="";
                         System.out.println("L-Login" +"R-Register");
                         l_or_r= input.nextLine();
-                        if (l_or_r=="L")
+                        if (l_or_r.equals("L"))
                         {
                             //login
                             //you can enter
@@ -70,7 +70,7 @@ public class Client
                              I need a code in both the Client class and the Server class.
 
                              */
-                        } else if (l_or_r=="R")
+                        } else if (l_or_r.equals("R"))
                         {//register
 
                             System.out.println("Name:");
@@ -168,6 +168,9 @@ public class Client
             System.out.println("Problem");
         }
     }
+
+
+
 
 
 
