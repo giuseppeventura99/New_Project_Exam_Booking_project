@@ -50,7 +50,7 @@ public void go()
                 System.out.println(name+surname+"registered in the website!");
 
                 var user= new Person(name,surname, Integer.parseInt(age),nationality,ID,password_ricevuta);
-                my_server.users_list.add(user);
+                my_server.list.add(user);
 
 
 

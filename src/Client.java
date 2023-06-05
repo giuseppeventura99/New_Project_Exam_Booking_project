@@ -5,14 +5,16 @@ import java.util.Scanner;
 
 public class Client
 {
-
-
     //let'so to add a new user!
     //so I need to an IP numeber and port
     public static void main(String[] args) {
-        String ip= args[0];
+        if (args.length!= 2) {
+            System.out.println("Error , wrong number of arguments! use IP and PORT");
+            System.exit(-1);
+        }
+        String ip = args[0];
         int port = Integer.parseInt(args[1]);
-        //i need a socket
+        System.out.println("Trying to connet to " + ip + "at port " + port);
         try {
             var socket = new Socket(ip, port);
             //i need a stream
@@ -23,7 +25,6 @@ public class Client
             var pw = new PrintWriter(os);
             var input = new Scanner(System.in);
             String choise =" ";
-
             //we can create the MENU
             while(!choise.equals("q"))
             {
@@ -32,20 +33,16 @@ public class Client
                 System.out.println("3-List of users");
                 System.out.println("4-Show us your expericence");
                 System.out.println("q-Exit");
-
                 System.out.println("------------------------------------------------");
                 System.out.println("Select you choose:");
                 choise= input.nextLine();
-
-
                 switch(choise)
                 {
                     case "1":
                         //add an user
                         //login or register?
-                        String l_or_r;
-                        System.out.println("L-Login" +
-                                "R-Register");
+                        String l_or_r="";
+                        System.out.println("L-Login" +"R-Register");
                         l_or_r= input.nextLine();
                         if (l_or_r=="L")
                         {
@@ -109,12 +106,6 @@ public class Client
                             outputStream.close();
                             pw.println("ADD_COMMAND_END");
                             pw.flush();
-
-
-
-
-
-
                         }
                         else{
                             System.out.println("Choise not recognized.Try more");
