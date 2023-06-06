@@ -126,6 +126,82 @@ public class Client
                         //Order from the lowest stars to the highest ones
 
                          */
+                        System.out.println("Choose one of these cities:");
+
+                        System.out.println("Alghero\nAosta\nBari\nBologna\nCagliari\nCatania\nFirenze\nGenova\nLecce\nMilano\nNapoli\nPerugia\nRimini\nRoma\nTorino\nTrento\nVenezia\nVerona");
+                        String selected_city= " ";
+                        System.out.println("Choose a city:");
+                        selected_city= input.nextLine();
+                        if(selected_city.equals("Alghero")||selected_city.equals("ALGHERO")||selected_city.equals("alghero"))
+                        {
+
+
+                        }
+                        if(selected_city.equals("Aosta")||selected_city.equals("AOSTA")||selected_city.equals("aosta"))
+                        {
+
+
+                        }
+                        if(selected_city.equals("Bari")||selected_city.equals("BARI")||selected_city.equals("bari"))
+                        {
+
+
+                        }
+                        if(selected_city.equals("Bologna")||selected_city.equals("BOLOGNA")||selected_city.equals("bologna"))
+                        {
+
+
+                        }
+                        if(selected_city.equals("Cagliari")||selected_city.equals("CAGLIARI")||selected_city.equals("cagliari"))
+                        {
+
+
+                        }
+                        if(selected_city.equals("Catania")||selected_city.equals("CATANIA")||selected_city.equals("catania"))
+                        {
+
+
+                        }
+                        if(selected_city.equals("Firenze")||selected_city.equals("FIRENZE")||selected_city.equals("firenze"))
+                        {
+
+
+                        }
+                        if(selected_city.equals("Alghero")||selected_city.equals("ALGHERO")||selected_city.equals("alghero"))
+                        {
+
+
+                        }
+                        if(selected_city.equals("Alghero")||selected_city.equals("ALGHERO")||selected_city.equals("alghero"))
+                        {
+
+
+                        }
+                        if(selected_city.equals("Alghero")||selected_city.equals("ALGHERO")||selected_city.equals("alghero"))
+                        {
+
+
+                        }
+                        if(selected_city.equals("Alghero")||selected_city.equals("ALGHERO")||selected_city.equals("alghero"))
+                        {
+
+
+                        }
+                        if(selected_city.equals("Alghero")||selected_city.equals("ALGHERO")||selected_city.equals("alghero"))
+                        {
+
+
+                        }
+                        if(selected_city.equals("Alghero")||selected_city.equals("ALGHERO")||selected_city.equals("alghero"))
+                        {
+
+
+                        }
+                        if(selected_city.equals("Alghero")||selected_city.equals("ALGHERO")||selected_city.equals("alghero"))
+                    {
+
+
+                    }
 
 
 

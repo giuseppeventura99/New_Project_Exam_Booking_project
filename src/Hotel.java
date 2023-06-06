@@ -24,6 +24,35 @@ public class Hotel
 
 
 
+    //metodo per scrivere solo gli hotel di quella città
+    public  void show_hotels_by_city(String city_name)
+    {
+        if(this.getName().equals(city_name))
+        {
+            System.out.println(" "+ this.getID_booking()+" - "+this.getName()+this.getPrice()+ " , "+ this.getCity() );
+        }
+
+    }
+
+
+    //metodo per prenotare
+    public void Booking(int selected_ID)
+    {
+        if(this.getID_booking()==selected_ID)
+
+        {
+            //allora dico che una stanza in questo albergo è stata prenotata
+            System.out.println("A room in the hotel"+this.getName()+" has been booked");
+
+        }
+    }
+
+
+
+
+    public int getID_booking() {
+        return ID_booking;
+    }
 
     public String getCity() {
         return city;
