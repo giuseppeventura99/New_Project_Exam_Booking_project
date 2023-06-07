@@ -1,17 +1,16 @@
 import java.io.*;
 import java.net.ServerSocket;
 import java.util.ArrayList;
-import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.Scanner;
 
-public class Server
-{
-    ArrayList<Person> list = new ArrayList<>();
-   /* PeriodicPrinter pp = new PeriodicPrinter();
+
+public class Server{
+
+    private ArrayList<Person> list = new ArrayList<>();
+
+    PeriodicPrinter pp = new PeriodicPrinter();
+
+
     public synchronized ArrayList<Person> getList() {
         // first solution to the concurrent modification exception potentially happening
         // in the client manager when doing the for loop for printing the list
@@ -74,18 +73,54 @@ public class Server
     private void periodicPrint() {
         while (true) {
             try {
-                Thread.sleep(30000);
+                Thread.sleep(3000);
                 System.out.println("I'm still alive!");
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }
 
-    }*/
+    }
 
     public static void main(String[] args) {
 
         var my_server = new Server();
+
+        //new Thread(my_server.pp).start();
+
+        Runnable r = ()-> my_server.periodicPrint();
+        new Thread(r).start();
+
+
+        new Thread(
+                ()-> {
+
+                    while (true) {
+                        try {
+                            Thread.sleep(60000);
+                            my_server.commandSaveList("periodic_save_"+new Date().toString());
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
+        ).start();
+
+
+
+        /*
+        new Thread( ()-> {
+            while (true) {
+                System.out.println("Some is happening !");
+            }
+        }).start();
+
+         */
+
+
+
+
+
 
         int port = Integer.parseInt(args[0]);
 
@@ -96,9 +131,8 @@ public class Server
                 System.out.println("SERVER: Waiting for connections...");
                 var client_socket = serverSocket.accept();
                 System.out.println("SERVER: Accepted connection from "+ client_socket.getRemoteSocketAddress());
-
-               // var cm = new ClientManager(client_socket,my_server);
-               // new Thread(cm).start();
+                var cm = new ClientManager(client_socket,my_server);
+                new Thread(cm).start();
 
             }
 
@@ -108,7 +142,5 @@ public class Server
 
 
     }
-
-
 
 }
