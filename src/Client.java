@@ -1,5 +1,7 @@
 import java.io.*;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -14,6 +16,7 @@ public class Client
         }
         String ip = args[0];
         int port = Integer.parseInt(args[1]);
+        ArrayList<Hotel>list_hotel= new ArrayList<Hotel>();
         System.out.println("Trying to connet to " + ip + "at port " + port);
         try {
             var socket = new Socket(ip, port);
@@ -135,73 +138,148 @@ public class Client
                         if(selected_city.equals("Alghero")||selected_city.equals("ALGHERO")||selected_city.equals("alghero"))
                         {
 
+                            String our_city="alghero";
+                            String menu_choise =" ";
+                            System.out.println("Discover "+ our_city+"hotels!");
+                            System.out.println("A-hotel list\nB-From the lower price to the highter\nC-Alphabetical Order\nD-Book an hotel");
+                            System.out.println("Make your choise:");
+                            menu_choise= input.nextLine();
+
+                            //lista degli hotel presenti
+                            if (menu_choise.equals("A")) {
+                                for (Hotel h : list_hotel) {
+                                    h.show_hotels_by_city(our_city);
+                                }
+                            }
+
+                            //ordina dal piu basso al piu alto
+                            else if(menu_choise.equals("B"))
+                            {
+                            Collections.sort(list_hotel);
+                            for(Hotel h: list_hotel)
+                            {
+                                h.show_hotels_by_city(our_city);
+                            }
+                            }
+                            //ordina alfabeticamente
+                            else if(menu_choise.equals("C"))
+                            {
+                                Ordina_Alfabetico comparator_name= new Ordina_Alfabetico();
+                                Collections.sort(list_hotel,comparator_name);
+                            for(Hotel h: list_hotel)
+                            {
+                                h.show_hotels_by_city(our_city);
+                            }}
+                            //book the hotel
+                            else if(menu_choise.equals("D"))
+                            {
+                            int ID_hotel;
+                            System.out.println("Digit an ID:");
+                            ID_hotel= input.nextInt();
+                            for(Hotel h:list_hotel)
+                            {
+                                h.Booking(ID_hotel);
+                            }}
+                            else
+                            {
+                                System.out.println("Choise not founded.Try more.");
+
+                            }
 
                         }
                         if(selected_city.equals("Aosta")||selected_city.equals("AOSTA")||selected_city.equals("aosta"))
                         {
 
+                            String our_city= "aosta";
+
 
                         }
                         if(selected_city.equals("Bari")||selected_city.equals("BARI")||selected_city.equals("bari"))
                         {
+                            String our_city="bari";
 
 
                         }
                         if(selected_city.equals("Bologna")||selected_city.equals("BOLOGNA")||selected_city.equals("bologna"))
                         {
+                            String our_city="bologna";
 
 
                         }
                         if(selected_city.equals("Cagliari")||selected_city.equals("CAGLIARI")||selected_city.equals("cagliari"))
                         {
+                            String our_city="cagliari";
 
 
                         }
                         if(selected_city.equals("Catania")||selected_city.equals("CATANIA")||selected_city.equals("catania"))
                         {
+                            String our_city="catania";
 
 
                         }
                         if(selected_city.equals("Firenze")||selected_city.equals("FIRENZE")||selected_city.equals("firenze"))
                         {
+                            String our_city="firenze";
 
 
                         }
-                        if(selected_city.equals("Alghero")||selected_city.equals("ALGHERO")||selected_city.equals("alghero"))
-                        {
+                        if(selected_city.equals("Genova")||selected_city.equals("GENOVA")||selected_city.equals("genova"))
+                        { String our_city="genova";
 
-
-                        }
-                        if(selected_city.equals("Alghero")||selected_city.equals("ALGHERO")||selected_city.equals("alghero"))
-                        {
 
 
                         }
-                        if(selected_city.equals("Alghero")||selected_city.equals("ALGHERO")||selected_city.equals("alghero"))
-                        {
+                        if(selected_city.equals("Lecce")||selected_city.equals("LECCE")||selected_city.equals("lecce"))
+                        { String our_city="lecce";
 
 
                         }
-                        if(selected_city.equals("Alghero")||selected_city.equals("ALGHERO")||selected_city.equals("alghero"))
-                        {
+                        if(selected_city.equals("Milano")||selected_city.equals("milano")||selected_city.equals("MILANO"))
+                        { String our_city="milano";
 
 
                         }
-                        if(selected_city.equals("Alghero")||selected_city.equals("ALGHERO")||selected_city.equals("alghero"))
-                        {
+                        if(selected_city.equals("Napoli")||selected_city.equals("NAPOLI")||selected_city.equals("napoli"))
+                        { String our_city="napoli";
 
 
                         }
-                        if(selected_city.equals("Alghero")||selected_city.equals("ALGHERO")||selected_city.equals("alghero"))
-                        {
+                        if(selected_city.equals("Perugia")||selected_city.equals("PERUGIA")||selected_city.equals("perugia"))
+                        { String our_city="perugia";
 
 
                         }
-                        if(selected_city.equals("Alghero")||selected_city.equals("ALGHERO")||selected_city.equals("alghero"))
-                    {
+                        if(selected_city.equals("Rimini")||selected_city.equals("RIMINI")||selected_city.equals("rimini"))
+                        { String our_city="rimini";
+
+
+                        }
+                        if(selected_city.equals("Roma")||selected_city.equals("ROMA")||selected_city.equals("roma"))
+                    { String our_city="roma";
 
 
                     }
+                        if(selected_city.equals("Torino")||selected_city.equals("TORINO")||selected_city.equals("torino"))
+                        { String our_city="torino";
+
+
+                        }
+                        if(selected_city.equals("Trento")||selected_city.equals("TRENTO")||selected_city.equals("trento"))
+                        { String our_city="trento";
+
+
+                        }
+                        if(selected_city.equals("Venezia")||selected_city.equals("VENEZIA")||selected_city.equals("venezia"))
+                        { String our_city="venezia";
+
+
+                        }
+                        if(selected_city.equals("Verona")||selected_city.equals("VERONA")||selected_city.equals("verona"))
+                        { String our_city="verona";
+
+
+                        }
 
 
 

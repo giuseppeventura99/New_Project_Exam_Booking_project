@@ -1,4 +1,4 @@
-public class Hotel
+public class Hotel implements Comparable<Hotel>
 {
     private String name;
     private double price;
@@ -67,5 +67,22 @@ public class Hotel
 
                 ", city='" + city + '\'' +
                 '}';
+    }
+
+    @Override
+    public int compareTo(Hotel Other_hotel)
+    {
+        if(this.price< Other_hotel.getPrice())
+        {
+            return -1;
+        }
+        else if (this.price> Other_hotel.getPrice())
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
     }
 }
