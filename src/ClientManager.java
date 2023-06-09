@@ -104,6 +104,7 @@ class ClientManager implements Runnable {
                         for (Person p: my_server.getList()) {
                             pw.println(p);
                             pw.flush();
+
                         }
 
 
