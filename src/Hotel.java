@@ -49,11 +49,14 @@ public class Hotel implements Comparable<Hotel>
         }
     }
 
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
 
 
-
-
-
+    public double getRate() {
+        return rate;
+    }
 
     public int getID_booking() {
         return ID_booking;
@@ -90,4 +93,8 @@ public class Hotel implements Comparable<Hotel>
             return 0;
         }
     }
+
+
+
+
 }

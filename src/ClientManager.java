@@ -1,10 +1,7 @@
 import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Scanner;
-import java.io.*;
-import java.net.Socket;
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 
@@ -32,6 +29,7 @@ class ClientManager implements Runnable {
                 received_command = sc.nextLine();
 
                 System.out.println("Receivd command "+received_command);
+                ArrayList<Hotel> list_hotel= new ArrayList<Hotel>();
 
                 switch (received_command) {
                     case "CMD_ADD_PERSON":
@@ -121,6 +119,51 @@ class ClientManager implements Runnable {
                         pw.println("END_DATA");
                         pw.flush();
                         break;
+
+
+
+                    case "rate_command_start":
+                        var received_ID=sc.nextInt();
+                        var receveid_rate=sc.nextInt();
+                        end_cmd= sc.nextLine();
+                        if(!end_cmd.equals("rate_command_end"))
+                        {
+                            System.out.println("Problem");
+                        }
+                        for(Hotel h: list_hotel)
+                        {
+                            if(received_ID==h.getID_booking())
+                            {
+                                //cambia il rate
+                                h.setRate(receveid_rate);
+                            }
+                        }break;
+
+                    case "order_list_command_start":
+                        //chiedo con dei comandi al server di darmi la lista ordinata
+                        end_cmd= sc.nextLine();
+                        if(!end_cmd.equals("order_list_command_end"))
+                        {
+                            System.out.println("Errore Formato");
+                        }
+
+                        Rate_Compare rate_compare = new Rate_Compare();
+                        Collections.sort(list_hotel, rate_compare);
+                        //faccio scorrere l'array
+                        for(Hotel h: list_hotel)//capire quale array sto muovendo
+                        {
+
+                            pw.println(h);
+                            pw.flush();
+                        }
+                        //quando finisce di scorrere do un comando che mi dice che l'array è stato scorso
+                        pw.println("END_ORDER_ARRAY");
+                        pw.flush();
+                        break;
+
+
+
+
 
                     default:
                         if (!received_command.isBlank())
