@@ -1,4 +1,5 @@
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Person implements Serializable
 {
@@ -12,6 +13,9 @@ public class Person implements Serializable
     private String password;
 
 
+    ArrayList<Hotel> user_hotels= new ArrayList<Hotel>();
+
+
 
     public Person(String name, String surname, int age, String nationality, String ID,String password) {
         this.name = name;
@@ -20,6 +24,7 @@ public class Person implements Serializable
         this.Nationality = nationality;
         this.ID = ID;
         this.password=password;
+        this.user_hotels= new ArrayList<Hotel>();
     }
 
 
@@ -47,6 +52,13 @@ public class Person implements Serializable
     public String getID() {
         return ID;
     }
+    //aggiungo l'hotel nell'array persona
+    public void addHotel_in_userlist(Hotel hotel)
+    {
+        user_hotels.add(hotel);
+    }
+
+
 
     @Override
     public String toString() {
@@ -58,5 +70,8 @@ public class Person implements Serializable
                 ", ID='" + ID + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+
+
+
     }
 }

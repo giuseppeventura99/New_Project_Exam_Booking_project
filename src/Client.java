@@ -17,6 +17,7 @@ public class Client
         String ip = args[0];
         int port = Integer.parseInt(args[1]);
         ArrayList<Hotel>list_hotel= new ArrayList<Hotel>();
+        ArrayList<Person>persone= new ArrayList<Person>();
         System.out.println("Trying to connet to " + ip + "at port " + port);
         try {
             var socket = new Socket(ip, port);
@@ -179,6 +180,8 @@ public class Client
                             for(Hotel h:list_hotel)
                             {
                                 h.Booking(ID_hotel);
+
+
                             }}
                             else
                             {
@@ -291,6 +294,32 @@ public class Client
                     case "3":
 
                         //rate hotels
+                        //scrivi una recensione
+                       /* String city_name=" ";
+                        int rate;
+                        System.out.println("Write a city name:");
+                        city_name= input.nextLine();
+                        for(Hotel h: list_hotel)
+                        {
+                            h.show_hotels_by_city(city_name);
+
+                        }
+                        int ID_rate= input.nextInt();
+                        for(Hotel hotel:list_hotel)
+                        {
+                            if(ID_rate== hotel.getID_booking())
+                            {
+                                System.out.println("Give a rate:");
+                                rate= input.nextInt();
+                                hotel.
+
+
+                            }
+                        }
+
+
+*/
+
 
 
 
@@ -318,8 +347,8 @@ public class Client
 
         }catch(IOException e)
         {
+            System.out.println("Cannot connect to "+ip);
             System.exit(-1);
-            System.out.println("Problem");
         }
     }
 

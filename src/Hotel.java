@@ -5,12 +5,14 @@ public class Hotel implements Comparable<Hotel>
 
     private String city;
     private int ID_booking;
+    double rate;
 
-    public Hotel(String name, double price, String city, int ID_booking) {
+    public Hotel(String name, double price, String city, int ID_booking,double rate) {
         this.name = name;
         this.price = price;
         this.city = city;
         this.ID_booking= ID_booking;
+        this.rate=rate;
     }
 
     public String getName() {
@@ -46,6 +48,9 @@ public class Hotel implements Comparable<Hotel>
 
         }
     }
+
+
+
 
 
 
