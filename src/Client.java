@@ -21,7 +21,7 @@ public class Client
         }
         String ip = args[0];
         int port = Integer.parseInt(args[1]);
-        ArrayList<Hotel>list_hotel= new ArrayList<Hotel>();
+
         ArrayList<Person>persone= new ArrayList<Person>();
         System.out.println("Trying to connet to " + ip + "at port " + port);
         try {
@@ -34,6 +34,22 @@ public class Client
             var pw = new PrintWriter(os);
             var input = new Scanner(System.in);
             String choose ="";
+
+
+            //I've to add hotel list
+            ArrayList<Hotel>list_hotel= new ArrayList<Hotel>();
+            for(Hotel h: list_hotel)
+            {
+                pw.println(h);
+                pw.flush();
+            }
+            pw.println("end_hotel_list");
+            pw.flush();//segnalo la fine dell'array
+            //comando per dire che l'array è stato ricevuto
+            String received_hotel_list= input.nextLine();
+            System.out.println("Iniziamo!");
+
+
             //we can create the MENU
             while(!choose.equals("q")) {
                 System.out.println("1-Add an user:");
@@ -136,11 +152,11 @@ public class Client
                         String selected_city = " ";
                         System.out.println("Choose a city:");
                         selected_city = input.nextLine();
-                        if (selected_city.equals("Alghero") || selected_city.equals("ALGHERO") || selected_city.equals("alghero")) {
+                       // if (selected_city.equals("Alghero") || selected_city.equals("ALGHERO") || selected_city.equals("alghero")) {
 
-                            String our_city = "alghero";
+                           // String our_city = "alghero";
                             String menu_choise = " ";
-                            System.out.println("Discover " + our_city + "hotels!");
+                            System.out.println("Discover " + selected_city + "hotels!");
                             System.out.println("A-hotel list\nB-From the lower price to the highter\nC-Alphabetical Order\nD-Book an hotel");
                             System.out.println("Make your choise:");
                             menu_choise = input.nextLine();
@@ -148,7 +164,7 @@ public class Client
                             //lista degli hotel presenti
                             if (menu_choise.equals("A")) {
                                 for (Hotel h : list_hotel) {
-                                    h.show_hotels_by_city(our_city);
+                                    h.show_hotels_by_city(selected_city);
                                 }
                             }
 
@@ -156,7 +172,7 @@ public class Client
                             else if (menu_choise.equals("B")) {
                                 Collections.sort(list_hotel);
                                 for (Hotel h : list_hotel) {
-                                    h.show_hotels_by_city(our_city);
+                                    h.show_hotels_by_city(selected_city);
                                 }
                             }
                             //ordina alfabeticamente
@@ -164,25 +180,29 @@ public class Client
                                 Ordina_Alfabetico comparator_name = new Ordina_Alfabetico();
                                 Collections.sort(list_hotel, comparator_name);
                                 for (Hotel h : list_hotel) {
-                                    h.show_hotels_by_city(our_city);
+                                    h.show_hotels_by_city(selected_city);
                                 }
                             }
                             //book the hotel
+
                             else if (menu_choise.equals("D")) {
                                 int ID_hotel;
                                 System.out.println("Digit an ID:");
                                 ID_hotel = input.nextInt();
-                                for (Hotel h : list_hotel) {
-                                    h.Booking(ID_hotel);
+                               // for (Hotel h : list_hotel) {
+                                 //   h.Booking(ID_hotel);}
+                                pw.println("booking_command_start");
+                                pw.flush();
+                                pw.println(selected_city);
+                                pw.flush();
+                                pw.println(ID_hotel);
+                                pw.flush();
+                                pw.println("booking_command_end");
+                                pw.flush();
+                            }break;
 
 
-                                }
-                            } else {
-                                System.out.println("Choise not founded.Try more.");
-
-                            }
-
-                        }
+                        /*
                         if (selected_city.equals("Aosta") || selected_city.equals("AOSTA") || selected_city.equals("aosta")) {
 
                             String our_city = "aosta";
@@ -266,9 +286,9 @@ public class Client
                         }
                         if (selected_city.equals("Verona") || selected_city.equals("VERONA") || selected_city.equals("verona")) {
                             String our_city = "verona";
+*/
 
 
-                        }
 
 
                     case "3":

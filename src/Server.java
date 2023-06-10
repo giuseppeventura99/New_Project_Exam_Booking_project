@@ -7,6 +7,7 @@ import java.util.Date;
 public class Server{
 
     private ArrayList<Person> list = new ArrayList<>();
+    private ArrayList<Hotel>hotel_list= new ArrayList<>();
 
     PeriodicPrinter pp = new PeriodicPrinter();
 
@@ -20,6 +21,16 @@ public class Server{
         return list_copy;
     }
 
+
+    public synchronized ArrayList<Hotel> get_Hotel_List() {
+        // first solution to the concurrent modification exception potentially happening
+        // in the client manager when doing the for loop for printing the list
+
+        // return a copy
+        var list_hotel_copy = new ArrayList<Hotel>(hotel_list);
+        return list_hotel_copy;
+    }
+
     public synchronized ArrayList<String> getListString() {
         var people = new ArrayList<String>();
 
@@ -29,6 +40,17 @@ public class Server{
 
         return people;
     }
+    public synchronized ArrayList<String> getListHotelString() {
+        var hotels = new ArrayList<String>();
+
+        for (Hotel h: hotel_list) {
+            hotels.add(h.toString());
+        }
+
+        return hotels;
+    }
+
+
 
     // Anita version
     // use the specific pw for directly send the persons to the client
@@ -46,9 +68,18 @@ public class Server{
     public synchronized void commandAddPerson(Person p) {
         list.add(p);
     }
+    public synchronized void commandAddHotel(Hotel h) {
+        hotel_list.add(h);
+    }
+
+
 
     public synchronized void commandRemovePerson(Person p) {
         list.remove(p);
+
+    }
+    public synchronized void commandRemoveHotel(Hotel h) {
+        hotel_list.remove(h);
 
     }
 

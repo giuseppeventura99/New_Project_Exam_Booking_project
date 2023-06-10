@@ -23,13 +23,16 @@ class ClientManager implements Runnable {
             sc = new Scanner(client_socket.getInputStream());
             var pw = new PrintWriter(client_socket.getOutputStream());
 
+
             String received_command = "";
 
             while (!received_command.equals("CMD_QUIT")) {
                 received_command = sc.nextLine();
 
                 System.out.println("Receivd command "+received_command);
-                ArrayList<Hotel> list_hotel= new ArrayList<Hotel>();
+               ArrayList<Hotel>list_hotel= new ArrayList<>();
+               ArrayList<Person>list_user= new ArrayList<>();
+
 
                 switch (received_command) {
                     case "CMD_ADD_PERSON":
@@ -46,12 +49,37 @@ class ClientManager implements Runnable {
                         System.out.println("Adding person "+name+" "+surname+" "+age);
 
                         var someone = new Person(name,surname,Integer.parseInt(age),nationality,ID,password);
+
                         my_server.commandAddPerson(someone);
 
                         break;
                     case "CMD_QUIT":
                         System.out.println("Closing connection... ");
                         break;
+
+
+                    case "booking_command_start":
+                        var selected_city= sc.nextLine();
+                        var booking_ID= sc.nextInt();
+                        var booking_end_command=sc.nextLine();
+                        if(!booking_end_command.equals("booking_command_end"))
+                        {
+                            System.out.println("Format error!");
+                        }
+                        System.out.println("Booking in progress...");
+                        for(Hotel h:list_hotel)
+                        {
+
+                            if(h.getID_booking()==booking_ID){
+                                System.out.println("Hotel"+h.getID_booking()+" "+h.getName()+", located in "+ h.getCity()+", has been booked");
+                        var somehotel = new Hotel(h.getName(), h.getPrice(), h.getCity(), h.getID_booking(), h.getRate());
+
+                        my_server.commandAddHotel(somehotel);
+
+                    }
+
+                        }
+
 
                     case "CMD_LOAD":
                         System.out.println("Loading list...");
