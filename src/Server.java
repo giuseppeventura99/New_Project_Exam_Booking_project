@@ -115,17 +115,18 @@ public class Server{
 
     public static void main(String[] args) {
 
+
+        /* for(Hotel h:list_hotel)
+        {
+         System.out.println("" +h.getID_booking()+h.getName()+"" +
+                 "" +h.getPrice()+h.getCity());
+        }*/
         var my_server = new Server();
-
         //new Thread(my_server.pp).start();
-
         Runnable r = ()-> my_server.periodicPrint();
         new Thread(r).start();
-
-
         new Thread(
                 ()-> {
-
                     while (true) {
                         try {
                             Thread.sleep(60000);
@@ -136,9 +137,6 @@ public class Server{
                     }
                 }
         ).start();
-
-
-
         /*
         new Thread( ()-> {
             while (true) {
@@ -147,31 +145,19 @@ public class Server{
         }).start();
 
          */
-
-
-
-
-
-
         int port = Integer.parseInt(args[0]);
-
         try {
             var serverSocket = new ServerSocket(port);
-
             while (true) {
                 System.out.println("SERVER: Waiting for connections...");
                 var client_socket = serverSocket.accept();
                 System.out.println("SERVER: Accepted connection from "+ client_socket.getRemoteSocketAddress());
                 var cm = new ClientManager(client_socket,my_server);
                 new Thread(cm).start();
-
             }
-
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-
-
     }
 
 }

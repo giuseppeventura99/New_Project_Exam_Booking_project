@@ -47,18 +47,14 @@ class ClientManager implements Runnable {
                             System.out.println("Format error!");
                         }
                         System.out.println("Adding person "+name+" "+surname+" "+age);
-
                         var someone = new Person(name,surname,Integer.parseInt(age),nationality,ID,password);
-
                         my_server.commandAddPerson(someone);
-
                         break;
                     case "CMD_QUIT":
                         System.out.println("Closing connection... ");
                         break;
-
-
                     case "booking_command_start":
+
                         var selected_city= sc.nextLine();
                         var booking_ID= sc.nextInt();
                         var booking_end_command=sc.nextLine();

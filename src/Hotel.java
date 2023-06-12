@@ -1,10 +1,10 @@
 public class Hotel implements Comparable<Hotel>
 {
-    private String name;
-    private double price;
+    public String name;
+    public double price;
 
-    private String city;
-    private int ID_booking;
+    public String city;
+    public int ID_booking;
     double rate;
 
     public Hotel(String name, double price, String city, int ID_booking,double rate) {
@@ -29,7 +29,7 @@ public class Hotel implements Comparable<Hotel>
     //metodo per scrivere solo gli hotel di quella città
     public  void show_hotels_by_city(String city_name)
     {
-        if(this.getName().equals(city_name))
+        if(this.getCity().equals(city_name))
         {
             System.out.println(" "+ this.getID_booking()+" - "+this.getName()+this.getPrice()+ " , "+ this.getCity() );
         }
