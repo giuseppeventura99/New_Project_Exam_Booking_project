@@ -38,13 +38,13 @@ public class Hotel implements Comparable<Hotel>
 
 
     //metodo per prenotare
-    public void Booking(int selected_ID)
+    public void Booking(String user_name,String user_surname,int selected_ID)
     {
         if(this.getID_booking()==selected_ID)
 
         {
             //allora dico che una stanza in questo albergo è stata prenotata
-            System.out.println("A room in the hotel"+this.getName()+" has been booked");
+            System.out.println(  user_name+ " "+user_surname+ " booked a room in "+this.getName()+" ");
 
         }
     }

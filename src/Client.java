@@ -150,17 +150,14 @@ public class Client
                             pw.println(ID);
                             pw.flush();
                             //I wanna create a random password that Hotel gives to the user
-                            /*
+
                             Random random = new Random();
                             int password = random.nextInt(90000) + 10000;
                             System.out.println("Password User is: " + password + " " + name + surname);
-                            //converto un intero in una stringa
-                            String passwordString = String.valueOf(password);
-                            OutputStream outputStream = socket.getOutputStream();
-                            outputStream.write(passwordString.getBytes());
-                            outputStream.close();
 
-                             */
+                            pw.println(password);
+                            pw.flush();
+
                             pw.println("CMD_ADD_END");
                             pw.flush();
                         } else {
@@ -180,15 +177,16 @@ public class Client
                         //Order from the lowest stars to the highest ones
 
                          */
+                        //funzione che chiede al server di darmi una lista di hotel
                         System.out.println("Choose one of these cities:");
 
                         System.out.println("Alghero\nAosta\nBari\nBologna\nCagliari\nCatania\nFirenze\nGenova\nLecce\nMilano\nNapoli\nPerugia\nRimini\nRoma\nTorino\nTrento\nVenezia\nVerona");
                         String selected_city = "";
                         System.out.println("Choose a city:");
                         selected_city = input.nextLine();
-                       // if (selected_city.equals("Alghero") || selected_city.equals("ALGHERO") || selected_city.equals("alghero")) {
+                        // if (selected_city.equals("Alghero") || selected_city.equals("ALGHERO") || selected_city.equals("alghero")) {
 
-                           // String our_city = "alghero";
+                        // String our_city = "alghero";
                         String menu_choise = "";
                         System.out.println("Discover " + selected_city + " hotels!");
                         while(!choose.equals("q")) {
@@ -202,6 +200,9 @@ public class Client
                             menu_choise = input.nextLine();
                             switch(menu_choise)
                             {
+                                var user_name=sc.nextLine();
+                                var user_surname=sc.nextLine();
+                                System.out.println(user_name+ user_surname);
                                 case "A":
                                     for (Hotel h : list_hotel)
                                     {
@@ -224,21 +225,29 @@ public class Client
 
                                     break;
                                 case "D":
+
                                     int ID_hotel;
                                     System.out.println("Digit an ID:");
                                     ID_hotel = input.nextInt();
-                                    // for (Hotel h : list_hotel) {
-                                        //  h.Booking(ID_hotel);}
-                                    pw.println("booking_command_start");
+                                    pw.println("BOOK_CMD_START");
                                     pw.flush();
                                     pw.println(selected_city);
                                     pw.flush();
                                     pw.println(ID_hotel);
                                     pw.flush();
-                                    pw.println("booking_command_end");
+                                    pw.println("BOOK_CMD_END");
                                     pw.flush();
+                                    var user_name=sc.nextLine();
+                                    var user_surname=sc.nextLine();
+                                    System.out.println(user_name+ user_surname);
+
+
+                                    for (Hotel h : list_hotel) {
+                                        h.Booking(user_name, user_surname,ID_hotel);}
                                     break;
-                            };
+
+
+                            }
                         }
 
                         /*if (selected_city.equals("Aosta") || selected_city.equals("AOSTA") || selected_city.equals("aosta")) {
