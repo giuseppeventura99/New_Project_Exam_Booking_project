@@ -71,15 +71,15 @@ public class Client
             list_hotel.add( new Hotel("Hotel Romeo-Giulietta",140.00,"verona",33,1));
             list_hotel.add( new Hotel("Hotel Due Torri",168.99,"verona",35,1));
             //I've to add hotel list
-            for(Hotel h: list_hotel)
+           /* for(Hotel h: list_hotel)
             {
                 pw.println(h);
                 pw.flush();
-            }
-            pw.println("end_hotel_list");
-            pw.flush();//segnalo la fine dell'array
+            }*/
+           // pw.println("end_hotel_list");
+            //pw.flush();//segnalo la fine dell'array
             //comando per dire che l'array è stato ricevuto
-            String received_hotel_list= input.nextLine();
+            //String received_hotel_list= input.nextLine();
             System.out.println("Iniziamo!");
 
 
