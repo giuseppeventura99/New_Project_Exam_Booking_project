@@ -35,15 +35,15 @@ class ClientManager implements Runnable {
 
 
                 switch (received_command) {
-                    case "CMD_ADD_PERSON":
+                    case "CMD_ADD_START":
                         var name = sc.nextLine();
                         var surname = sc.nextLine();
                         var age = sc.nextLine();
-                        var nationality = "";
-                        var ID = "";
+                        var nationality = sc.nextLine();
+                        var ID = sc.nextLine();
                         var password = ";";
                         var end_cmd  = sc.nextLine();
-                        if (!end_cmd.equals("END_CMD")) {
+                        if (!end_cmd.equals("CMD_ADD_END")) {
                             System.out.println("Format error!");
                         }
                         System.out.println("Adding person "+name+" "+surname+" "+age);

@@ -127,7 +127,7 @@ public class Client
                              */
                         } else if (l_or_r.equals("R")) {//register
 
-                            pw.println("ADD_COMMAND_START");
+                            pw.println("CMD_ADD_START");
                             pw.flush();
                             System.out.println("Name:");
                             String name = input.nextLine();
@@ -150,6 +150,7 @@ public class Client
                             pw.println(ID);
                             pw.flush();
                             //I wanna create a random password that Hotel gives to the user
+                            /*
                             Random random = new Random();
                             int password = random.nextInt(90000) + 10000;
                             System.out.println("Password User is: " + password + " " + name + surname);
@@ -158,7 +159,9 @@ public class Client
                             OutputStream outputStream = socket.getOutputStream();
                             outputStream.write(passwordString.getBytes());
                             outputStream.close();
-                            pw.println("ADD_COMMAND_END");
+
+                             */
+                            pw.println("CMD_ADD_END");
                             pw.flush();
                         } else {
                             System.out.println("Choise not recognized.Try more");
