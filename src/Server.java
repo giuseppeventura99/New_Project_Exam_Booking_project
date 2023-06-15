@@ -52,8 +52,7 @@ public class Server{
 
 
 
-    // Anita version
-    // use the specific pw for directly send the persons to the client
+
     public synchronized void commandPrint(PrintWriter pw) {
 
         for (Person p:list) {

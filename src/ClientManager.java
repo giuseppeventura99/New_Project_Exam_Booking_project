@@ -48,7 +48,7 @@ class ClientManager implements Runnable {
             list_hotel.add( new Hotel("Hotel Brufani Palace",100.00,"perugia,",20,1));
             list_hotel.add( new Hotel("Hotel de Londres",48.99,"rimini",21,1));
             list_hotel.add(new Hotel("Grand Hotel Rimini",71.99,"rimini",22,1));
-            list_hotel.add( new Hotel("Hotel Colosseo",119.99,"roma",23,1));
+            list_hotel.add( new Hotel("Hotel Totti",119.99,"roma",23,1));
             list_hotel.add( new Hotel("Hotel Hassler",150.99,"roma",24,1));
             list_hotel.add(new Hotel("Hotel Eden",140.00,"roma",25,1));
             list_hotel.add(new Hotel("Hotel Parioli",170.99,"roma",26,1));
@@ -61,12 +61,14 @@ class ClientManager implements Runnable {
             list_hotel.add( new Hotel("Hotel Romeo-Giulietta",140.00,"verona",33,1));
             list_hotel.add( new Hotel("Hotel Due Torri",168.99,"verona",35,1));
 
-            String received_command = "";
+            //funzione che deve inviare un array al client
+
+            String received_command = " ";
 
             while (!received_command.equals("CMD_QUIT")) {
                 received_command = sc.nextLine();
 
-                System.out.println("Receivd command "+received_command);
+                System.out.println("Received command:"+received_command);
 
                 ArrayList<Person>list_user= new ArrayList<>();
 
@@ -100,11 +102,10 @@ class ClientManager implements Runnable {
                             System.out.println("Format error!");
                         }
                         System.out.println("Booking in progress...");
-                        for(Hotel h:list_hotel)
-                        {
+                        for(Hotel h:list_hotel) {
 
-                            if(h.getID_booking()==booking_ID){
-                                System.out.println("Hotel"+h.getID_booking()+" "+h.getName()+", located in "+ h.getCity()+", has been booked");
+                            if (h.getID_booking() == booking_ID) {
+                                System.out.println("Hotel" + h.getID_booking() + " " + h.getName() + ", located in " + h.getCity() + ", has been booked");
                                 var somehotel = new Hotel(h.getName(), h.getPrice(), h.getCity(), h.getID_booking(), h.getRate());
 
                                 my_server.commandAddHotel(somehotel);
@@ -112,9 +113,7 @@ class ClientManager implements Runnable {
                             }
 
                         }
-
-
-                    case "CMD_LOAD":
+                        case "CMD_LOAD":
                         System.out.println("Loading list...");
                         String file_to_load = sc.nextLine();
                         end_cmd  = sc.nextLine();
@@ -152,38 +151,56 @@ class ClientManager implements Runnable {
 
                         break;
 
-                    case "CMD_LIST":
+                    case "CMD_LIST_START":
                         end_cmd  = sc.nextLine();
-                        if (!end_cmd.equals("END_CMD")) {
+                        int lenght=0;
+                        var our_city=sc.nextLine();
+                        if (!end_cmd.equals("END_LIST_CMD")) {
                             System.out.println("Format error!");
                         }
+                        //voglio la lunghezza
+                       // Ordina_Alfabetico ordinaAlfabetico= new Ordina_Alfabetico()
+
+                        for (Hotel h:list_hotel) {
+                            if(h.getCity().equals(our_city))
+                            {
+                                lenght++;
+                            }
+                        }
+                        pw.println(lenght);
+                        //ricevo il tipo di ordine
+
+                        int order_variable=sc.nextInt();
+                        if(order_variable==2)
+                        {
+                            Collections.sort(list_hotel);
+                        }
+
+                        //else if (order_variable==3)
+                        //{}
 
 
-                        // solution 1: a copy of the list
-                        for (Person p: my_server.getList()) {
-                            pw.println(p);
-                            pw.flush();
+                        for (Hotel h:list_hotel) {
+                            if(h.getCity().equals(our_city))
+                            {
+                                pw.println(h.getID_booking());
+                                pw.flush();
+                                pw.println(h.getName());
+                                pw.flush();
+                                pw.println(h.getPrice());
+                                pw.flush();
+                                pw.println(h.getCity());
+                                pw.flush();
+                                pw.println(h.getRate());
+                                pw.flush();
 
+                            }
                         }
 
 
-                        // the conversion of each person to string is done on the server side
-                        for (String s:my_server.getListString()) {
-                            pw.println(s);
-                            pw.flush();
-
-                        }
-
-                        // 3rd solution
-                        my_server.commandPrint(pw);
-
-                        pw.println("END_DATA");
-                        pw.flush();
                         break;
 
-
-
-                    case "rate_command_start":
+                        case "rate_command_start":
                         var received_ID=sc.nextInt();
                         var receveid_rate=sc.nextInt();
                         end_cmd= sc.nextLine();

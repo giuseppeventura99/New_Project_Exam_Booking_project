@@ -15,6 +15,7 @@ public class Client
     //let'so to add a new user!
     //so I need to an IP numeber and port
     public static void main(String[] args) {
+
         if (args.length!= 2) {
             System.out.println("Error , wrong number of arguments! use IP and PORT");
             System.exit(-1);
@@ -34,56 +35,12 @@ public class Client
             var pw = new PrintWriter(os);
             var input = new Scanner(System.in);
             String choose ="";
-            ArrayList<Hotel> list_hotel= new ArrayList<Hotel>();
-            list_hotel.add( new Hotel("Hotel Catalunya",60.99,"alghero",1,1));
-            list_hotel.add(new Hotel("Hotel Carolos V",70.99,"alghero",02,1));
-            list_hotel.add(new Hotel("Hotel Turin",69.99,"aosta",2,1));
-            list_hotel.add(new Hotel("Grande Albergo delle Nazioni",50.99,"bari",3,1));
-            list_hotel.add( new Hotel("Hotel Metropolitan",50.10,"bologna",4,1));
-            list_hotel.add( new Hotel("Hotel Dall'Ara",79.99,"bologna",5,1));
-            list_hotel.add( new Hotel("Hotel Sardegna",49.99,"cagliari",6,1));
-            list_hotel.add( new Hotel("Hotel Regina Margherita",99.99,"cagliari",7,1));
-            list_hotel.add( new Hotel("Hotel Nettuno",45.99,"catania",8,1));
-            list_hotel.add( new Hotel("Hotel Brunelleschi",100.99,"firenze",9,1));
-            list_hotel.add( new Hotel("Hotel Continentale",89.99,"firenze",10,1));
-            list_hotel.add( new Hotel("Hotel Dante",79.99,"firenze",11,1));
-            list_hotel.add( new Hotel("Hotel Bristol Palace",60.00,"genova",12,1));
-            list_hotel.add(new Hotel("Hotel Risorgimento Palace",50.00,"lecce",13,1));
-            list_hotel.add( new Hotel("Hotel Brera",100.00,"milano",14,1));
-            list_hotel.add(new Hotel("Hotel Milano Scala",120.99,"milano",15,1));
-            list_hotel.add(new Hotel( "Excelsior Hotel Gallia",130.99,"milano",16,1));
-            list_hotel.add( new Hotel("Hotel De Laurentis",80.99,"napoli",17,1));
-            list_hotel.add( new Hotel("Grand Hotel Vesuvio",79.99,"napoli",18,1));
-            list_hotel.add( new Hotel("Hotel Romeo",99.99,"napoli",19,1));
-            list_hotel.add( new Hotel("Hotel Brufani Palace",100.00,"perugia,",20,1));
-            list_hotel.add( new Hotel("Hotel de Londres",48.99,"rimini",21,1));
-            list_hotel.add(new Hotel("Grand Hotel Rimini",71.99,"rimini",22,1));
-            list_hotel.add( new Hotel("Hotel Colosseo",119.99,"roma",23,1));
-            list_hotel.add( new Hotel("Hotel Hassler",150.99,"roma",24,1));
-            list_hotel.add(new Hotel("Hotel Eden",140.00,"roma",25,1));
-            list_hotel.add(new Hotel("Hotel Parioli",170.99,"roma",26,1));
-            list_hotel.add( new Hotel("Hotel Agnelli",78.95,"torino",27,1));
-            list_hotel.add( new Hotel("Hotel Turin Palace",98.95,"torino",28,1));
-            list_hotel.add( new Hotel("Grand Hotel Trento",50.00,"trento",29,1));
-            list_hotel.add( new Hotel("Hotel Danieli",190.99,"venezia",30,1));
-            list_hotel.add( new Hotel("Hotel Palazzo Barbarigo",210.99,"venezia",31,1));
-            list_hotel.add( new Hotel("Hotel Venezia",180.00,"venezia",32,1));
-            list_hotel.add( new Hotel("Hotel Romeo-Giulietta",140.00,"verona",33,1));
-            list_hotel.add( new Hotel("Hotel Due Torri",168.99,"verona",35,1));
-            //I've to add hotel list
-           /* for(Hotel h: list_hotel)
-            {
-                pw.println(h);
-                pw.flush();
-            }*/
-           // pw.println("end_hotel_list");
-            //pw.flush();//segnalo la fine dell'array
-            //comando per dire che l'array è stato ricevuto
-            //String received_hotel_list= input.nextLine();
-            System.out.println("Iniziamo!");
-
-
+            System.out.println("Let's go!");
             //we can create the MENU
+            ArrayList<Hotel> list_hotel= new ArrayList<>();
+            //metodo per acquisire la lista
+
+            //-----------------------------
             while(!choose.equals("q")) {
                 System.out.println("1-Add an user:");
                 System.out.println("2-Book an Hotel");
@@ -130,23 +87,23 @@ public class Client
                             pw.println("CMD_ADD_START");
                             pw.flush();
                             System.out.println("Name:");
-                            String name = input.nextLine();
+                            var name = input.nextLine();
                             pw.println(name);
                             pw.flush();
                             System.out.println("Surname:");
-                            String surname = input.nextLine();
+                            var surname = input.nextLine();
                             pw.println(surname);
                             pw.flush();
                             System.out.println("Age:");
-                            String age = input.nextLine();
+                            var age = input.nextLine();
                             pw.println(age);
                             pw.flush();
                             System.out.println("Nationality:");
-                            String nationality = input.nextLine();
+                            var nationality = input.nextLine();
                             pw.println(nationality);
                             pw.flush();
                             System.out.println("ID:");
-                            String ID = input.nextLine();
+                            var ID = input.nextLine();
                             pw.println(ID);
                             pw.flush();
                             //I wanna create a random password that Hotel gives to the user
@@ -197,33 +154,124 @@ public class Client
                             System.out.println("q-Exit");
                             System.out.println("------------------------------------------------");
                             System.out.println("Make your choise:");
+
+
+
+
                             menu_choise = input.nextLine();
                             switch(menu_choise)
                             {
-                                var user_name=sc.nextLine();
-                                var user_surname=sc.nextLine();
-                                System.out.println(user_name+ user_surname);
+
+                              //  var user_name=sc.nextLine();
+                               // var user_surname=sc.nextLine();
+                               // System.out.println(user_name+ user_surname);
                                 case "A":
-                                    for (Hotel h : list_hotel)
+                                    var our_city= selected_city.toLowerCase();
+                                    int lenght;
+                                    pw.println("CMD_LIST_START");
+                                    pw.flush();
+                                    pw.println("END_LIST_CMD");
+                                    pw.flush();
+                                    pw.println(our_city);
+                                    pw.flush();
+                                    lenght=sc.nextInt();
+                                    int order_variable=1;
+                                    pw.println(order_variable);
+                                    pw.flush();
+                                    System.out.println(lenght);
+                                    System.out.println("-----------------------------------");
+                                    System.out.println(" List of "+ our_city+ " Hotels");
+                                    for(int i=0;i<lenght;i++)
                                     {
-                                        if(selected_city.toLowerCase().equals(h.getCity()))
-                                            System.out.println(" " +h.getID_booking()+ " "+h.getName()+" "+h.getPrice()+" "+h.getCity());
-                                    }
-                                    break;
-                                case "B":
-                                    Collections.sort(list_hotel);
-                                    for (Hotel h : list_hotel) {
-                                        if(selected_city.toLowerCase().equals(h.getCity()))
-                                            System.out.println(" " +h.getID_booking()+ " "+h.getName()+" "+h.getPrice()+" "+h.getCity());}
-                                    break;
-                                case "C":
-                                    Ordina_Alfabetico comparator_name = new Ordina_Alfabetico();
-                                    Collections.sort(list_hotel, comparator_name);
-                                    for (Hotel h : list_hotel) {
-                                        if(selected_city.toLowerCase().equals(h.getCity()))
-                                            System.out.println(" " +h.getID_booking()+ " "+h.getName()+" "+h.getPrice()+" "+h.getCity());}
+
+                                       var ID__hotel=sc.nextLine();
+                                       System.out.print(ID__hotel);
+                                       System.out.print("|");
+                                       var name_hotel=sc.nextLine();
+                                       System.out.print(name_hotel);
+                                       System.out.print("|");
+                                       var price_hotel=sc.nextLine();
+                                       System.out.print(price_hotel);
+                                       System.out.print("|");
+                                       var city_hotel=sc.nextLine();
+                                       System.out.print(city_hotel);
+                                       System.out.println("|");
+                                       var rate_hotel= sc.nextLine();
+                                       System.out.println("-------------------------");
+                                       }
 
                                     break;
+                                    //----------------------------------------
+                                case "B":
+                                    //ordinato in base al prezzo
+                                    pw.println("CMD_LIST_START");
+                                    pw.println("CMD_LIST_END");
+                                    our_city=selected_city.toLowerCase();
+                                    pw.println(our_city);
+                                    pw.flush();
+                                    lenght= sc.nextInt();
+                                    int order_variable_price=2;
+                                    pw.println(order_variable_price);
+                                    pw.flush();
+                                    System.out.println(lenght);
+                                    System.out.println(" List of "+ our_city+ " Hotels");
+                                    for(int i=0;i<lenght;i++)
+                                    {
+
+                                        var ID__hotel=sc.nextLine();
+                                        System.out.print(ID__hotel);
+                                        System.out.print("|");
+                                        var name_hotel=sc.nextLine();
+                                        System.out.print(name_hotel);
+                                        System.out.print("|");
+                                        var price_hotel=sc.nextLine();
+                                        System.out.print(price_hotel);
+                                        System.out.print("|");
+                                        var city_hotel=sc.nextLine();
+                                        System.out.print(city_hotel);
+                                        System.out.println("|");
+                                        var rate_hotel= sc.nextLine();
+                                        System.out.println("-------------------------");
+                                    }
+
+                                    break;
+                                    case "C":
+                                        our_city= selected_city.toLowerCase();
+                                        pw.println("CMD_LIST_START");
+                                        pw.flush();
+                                        pw.println("END_LIST_CMD");
+                                        pw.flush();
+                                        pw.println(our_city);
+                                        pw.flush();
+                                        lenght=sc.nextInt();
+                                        int order_variable_alphabet=3;
+                                        pw.println(order_variable_alphabet);
+                                        pw.flush();
+                                        System.out.println(lenght);
+                                        System.out.println("-----------------------------------");
+                                        System.out.println(" List of "+ our_city+ " Hotels");
+                                        for(int i=0;i<lenght;i++)
+                                        {
+
+                                            var ID__hotel=sc.nextLine();
+                                            System.out.print(ID__hotel);
+                                            System.out.print("|");
+                                            var name_hotel=sc.nextLine();
+                                            System.out.print(name_hotel);
+                                            System.out.print("|");
+                                            var price_hotel=sc.nextLine();
+                                            System.out.print(price_hotel);
+                                            System.out.print("|");
+                                            var city_hotel=sc.nextLine();
+                                            System.out.print(city_hotel);
+                                            System.out.println("|");
+                                            var rate_hotel= sc.nextLine();
+                                            System.out.println("-------------------------");
+                                        }
+
+                                        break;
+
+
                                 case "D":
 
                                     int ID_hotel;
@@ -237,15 +285,15 @@ public class Client
                                     pw.flush();
                                     pw.println("BOOK_CMD_END");
                                     pw.flush();
-                                    var user_name=sc.nextLine();
-                                    var user_surname=sc.nextLine();
-                                    System.out.println(user_name+ user_surname);
+                                   // var user_name=sc.nextLine();
+                                    //var user_surname=sc.nextLine();
+                                    //System.out.println(user_name+ user_surname);
 
 
-                                    for (Hotel h : list_hotel) {
+                                   /* for (Hotel h : list_hotel) {
                                         h.Booking(user_name, user_surname,ID_hotel);}
                                     break;
-
+*/
 
                             }
                         }
@@ -346,11 +394,15 @@ public class Client
                             System.out.println("*****************************************************");
                         }
                 }
+
             }
         }catch(IOException e)
         {
             System.out.println("Cannot connect to "+ip);
             System.exit(-1);
         }
+
     }
+
+
 }
