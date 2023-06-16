@@ -71,8 +71,6 @@ class ClientManager implements Runnable {
                 System.out.println("Received command:"+received_command);
 
                 ArrayList<Person>list_user= new ArrayList<>();
-
-
                 switch (received_command) {
                     case "CMD_ADD_START":
                         var name = sc.nextLine();
@@ -85,9 +83,9 @@ class ClientManager implements Runnable {
                         if (!end_cmd.equals("CMD_ADD_END")) {
                             System.out.println("Format error!");
                         }
-                        System.out.println("Adding person "+name+" "+surname+" "+age);
-                        var someone = new Person(name,surname,Integer.parseInt(age),nationality,ID,password);
-                        my_server.commandAddPerson(someone);
+                        System.out.println("New user credentials: "+name+" "+surname+" " +nationality+" - "+ ID);
+                        //var someone = new Person(name,surname,Integer.parseInt(age),nationality,ID,password);
+                        //my_server.commandAddPerson(someone);
                         break;
                     case "CMD_QUIT":
                         System.out.println("Closing connection... ");
@@ -106,9 +104,9 @@ class ClientManager implements Runnable {
 
                             if (h.getID_booking() == booking_ID) {
                                 System.out.println("Hotel" + h.getID_booking() + " " + h.getName() + ", located in " + h.getCity() + ", has been booked");
-                                var somehotel = new Hotel(h.getName(), h.getPrice(), h.getCity(), h.getID_booking(), h.getRate());
+                               // var somehotel = new Hotel(h.getName(), h.getPrice(), h.getCity(), h.getID_booking(), h.getRate());
 
-                                my_server.commandAddHotel(somehotel);
+                               // my_server.commandAddHotel(somehotel);
 
                             }
 
@@ -147,100 +145,102 @@ class ClientManager implements Runnable {
                             System.out.println("Format error!");
                         }
 
-                        my_server.commandSaveList(filename);
+                       // my_server.commandSaveList(filename);
 
                         break;
 
                     case "CMD_LIST_START":
-                        end_cmd  = sc.nextLine();
-                        int lenght=0;
-                        var our_city=sc.nextLine();
-                        if (!end_cmd.equals("END_LIST_CMD")) {
-                            System.out.println("Format error!");
-                        }
-                        //voglio la lunghezza
-                       // Ordina_Alfabetico ordinaAlfabetico= new Ordina_Alfabetico()
-
-                        for (Hotel h:list_hotel) {
-                            if(h.getCity().equals(our_city))
-                            {
-                                lenght++;
-                            }
-                        }
-                        pw.println(lenght);
-                        //ricevo il tipo di ordine
-
-                        int order_variable=sc.nextInt();
-                        if(order_variable==2)
-                        {
-                            Collections.sort(list_hotel);
-                        }
-
-                        //else if (order_variable==3)
-                        //{}
-
-
-                        for (Hotel h:list_hotel) {
-                            if(h.getCity().equals(our_city))
-                            {
-                                pw.println(h.getID_booking());
-                                pw.flush();
-                                pw.println(h.getName());
-                                pw.flush();
-                                pw.println(h.getPrice());
-                                pw.flush();
-                                pw.println(h.getCity());
-                                pw.flush();
-                                pw.println(h.getRate());
-                                pw.flush();
-
-                            }
-                        }
-
-
-                        break;
-
-                        case "rate_command_start":
-                        var received_ID=sc.nextInt();
-                        var receveid_rate=sc.nextInt();
                         end_cmd= sc.nextLine();
-                        if(!end_cmd.equals("rate_command_end"))
+                        int dim=0;
+                        var my_city= sc.nextLine();
+                        System.out.println(" La città "+ my_city + " è stata ricevuta con successo!");
+                        if(!end_cmd.equals("CMD_LIST_END"))
                         {
-                            System.out.println("Problem");
+                            System.out.print("Format Error");
                         }
-                        for(Hotel h: list_hotel)
+
+                        else
                         {
-                            if(received_ID==h.getID_booking())
+                            //prendiamo la lunghezza dell'array considerando la città scelta
+                            for(Hotel h: list_hotel)
                             {
-                                //cambia il rate
-                                h.setRate(receveid_rate);
+                                if(h.getCity().equals(my_city))
+                                {
+                                    dim++;
+                                }
                             }
-                        }break;
-
-                    case "order_list_command_start":
-                        //chiedo con dei comandi al server di darmi la lista ordinata
-                        end_cmd= sc.nextLine();
-                        if(!end_cmd.equals("order_list_command_end"))
-                        {
-                            System.out.println("Errore Formato");
-                        }
-
-                        Rate_Compare rate_compare = new Rate_Compare();
-                        Collections.sort(list_hotel, rate_compare);
-                        //faccio scorrere l'array
-                        for(Hotel h: list_hotel)//capire quale array sto muovendo
-                        {
-
-                            pw.println(h);
+                            pw.println(dim);
                             pw.flush();
+                            //ora per tutte le celle dell'array per cui la città è uguale a quella inviata
+                            //mando dall'altra parte
+                            for(Hotel h: list_hotel)
+                            {
+                                if(h.getCity().equals(my_city))
+                                {
+                                    System.out.println("--------------------------------");
+
+                                    pw.println(h.name);
+                                    pw.flush();
+                                    System.out.println(h.name + "Nome hotel inviato");
+                                    pw.println(h.price);
+                                    pw.flush();
+                                    System.out.println(h.price +"Prezzo hotel inviato");
+                                    pw.println(h.city);
+                                    pw.flush();
+                                    System.out.println(h.city + "Città hotel inviata");
+                                    pw.println(h.ID_booking);
+                                    pw.flush();
+                                    System.out.println(h.ID_booking+ "ID hotel inviatoo");
+                                    pw.println(h.rate);
+                                    pw.flush();
+                                    System.out.println(h.rate+ " è il Rate hotel inviato");
+
+
+
+
+                                }
+                            }break;
                         }
-                        //quando finisce di scorrere do un comando che mi dice che l'array è stato scorso
-                        pw.println("END_ORDER_ARRAY");
-                        pw.flush();
-                        break;
 
 
 
+
+                    case "PRICE_START":
+                        int lenght=0;
+                        end_cmd=sc.nextLine();
+                        var ord_price_city=sc.nextLine();
+                        if(!end_cmd.equals("PRICE_END"))
+                        {
+                           System.out.println("Format Error");
+                        }
+                        else {
+                            //calcolo la lunghezza dell'array considerando la città
+                            for (Hotel h : list_hotel) {
+                                if (h.getCity().equals(ord_price_city)) {
+                                    lenght++;
+                                }
+                            }
+                            //invio la lunghezza al client
+                            pw.println(lenght);
+                            pw.flush();
+                            Collections.sort(list_hotel);
+                            for (Hotel h : list_hotel) {
+                                if (h.getCity().equals(ord_price_city)) {
+                                    pw.println(h.ID_booking);
+                                    pw.flush();
+                                    pw.println(h.name);
+                                    pw.flush();
+                                    pw.println(h.price);
+                                    pw.flush();
+                                    pw.println(h.city);
+
+
+                                }
+
+                            }
+                            break;
+
+                        }
 
 
                     default:

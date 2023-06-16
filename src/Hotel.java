@@ -5,9 +5,9 @@ public class Hotel implements Comparable<Hotel>
 
     public String city;
     public int ID_booking;
-    double rate;
+    int rate;
 
-    public Hotel(String name, double price, String city, int ID_booking,double rate) {
+    public Hotel(String name, double price, String city, int ID_booking,int rate) {
         this.name = name;
         this.price = price;
         this.city = city;
@@ -49,12 +49,12 @@ public class Hotel implements Comparable<Hotel>
         }
     }
 
-    public void setRate(double rate) {
+    public void setRate(int rate) {
         this.rate = rate;
     }
 
 
-    public double getRate() {
+    public int getRate() {
         return rate;
     }
 
