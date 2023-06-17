@@ -43,9 +43,9 @@ public class Client
             //-----------------------------
             while(!choose.equals("q")) {
                 System.out.println("1-Add an user:");
-                System.out.println("2-Book an Hotel");
-                System.out.println("3-List of users");
-                System.out.println("4-Show us your expericence");
+                System.out.println("2-List of hotel");
+                System.out.println("3-Show us your expericence");
+                System.out.println("4-Book a hotel");
                 System.out.println("q-Exit");
                 System.out.println("------------------------------------------------");
                 System.out.println("Select you choose:");
@@ -146,15 +146,13 @@ public class Client
                         // String our_city = "alghero";
                         String menu_choise = "";
                         System.out.println("Discover " + selected_city + " hotels!");
-                        while (!choose.equals("q")) {
+                        while (!menu_choise.equals("q")) {
                             System.out.println("A-hotel list:");
                             System.out.println("B-From the lower price to the highter:");
                             System.out.println("C-Alphabetical Order");
-                            System.out.println("D-Book an hotel");
                             System.out.println("q-Exit");
                             System.out.println("------------------------------------------------");
                             System.out.println("Make your choise:");
-
 
 
                             menu_choise = input.nextLine();
@@ -174,64 +172,82 @@ public class Client
                                     dim = sc.nextInt();
                                     //la stampo
                                     System.out.print(dim);
-                                    //ricevo dal server quello che mi è stato inviato
-                                    for (int i = 0; i < dim; i++) {
-
-                                        var my_name = sc.nextLine();
-                                        var my_price = sc.nextLine();
-                                        var my_hotel_city = sc.nextLine();
-                                        var my_ID = sc.nextLine();
-                                        var my_rate = sc.nextLine();
-                                        System.out.println("___________________________");
-                                        System.out.print(my_name);
-                                        System.out.print("|");
-                                        System.out.print(my_ID);
-                                        System.out.print("|");
-                                        System.out.print(my_price);
-                                        System.out.print("|");
-                                        System.out.print(my_rate);
-                                        System.out.print("|");
-                                        System.out.print(my_hotel_city);
-                                        System.out.println("|");
-                                        System.out.println(" ");
-
-
-                                    }
-                                    //---------------------------------------------
-                                case "B":
-                                    int lenght;
-                                    ArrayList<Hotel> price_list = new ArrayList<>();
-                                    my_city = selected_city.toLowerCase();
-                                    pw.println("PRICE_START");
-                                    pw.flush();
-                                    pw.println("PRICE_END");
-                                    pw.flush();
-                                    pw.println(my_city);
-                                    pw.flush();
-                                    //ricevo la lunghezza dal server
-                                    lenght = sc.nextInt();
-                                    System.out.println(lenght + "nel caso B");
-                                    for (int i = 0; i < lenght; i++) {
-                                        System.out.println("-----------------------------");
-                                        var id = sc.nextInt();
-                                        var name = sc.nextLine();
-                                        var price = sc.nextDouble();
-                                        var city = sc.nextLine();
-                                        System.out.print(id);
-                                        System.out.print("|");
-                                        System.out.print(name);
-                                        System.out.print("|");
-                                        System.out.print(city);
-                                        System.out.print("|");
-                                        System.out.println(price);
+                                    boolean continue_list = true;
+                                    while (continue_list) {
+                                        String line = sc.nextLine();
+                                        if (line.equals("LIST_DATA_END")) {
+                                            continue_list = false;
+                                        } else {
+                                            System.out.println(line);
+                                            System.out.println("-----------------------------------------------------");
+                                        }
 
                                     }
                                     break;
 
 
+                                case "B":
+                                    System.out.println("From lowest to highest price...");
+                                    System.out.println("  ");
+                                    String my_price_city = selected_city.toLowerCase();
+                                    pw.println("ORD_PRICE_START");
+                                    pw.flush();
+                                    pw.println("ORD_PRICE_END");
+                                    pw.flush();
+                                    //invio la città
+                                    pw.println(my_price_city);
+                                    pw.flush();
+                                    //ricevo la lunghezza dell'array hotel
+                                    dim = sc.nextInt();
+                                    //la stampo
+                                    System.out.print(dim);
+                                    boolean continue_list_price = true;
+                                    while (continue_list_price) {
+                                        String line = sc.nextLine();
+                                        if (line.equals("LIST_PRICE_DATA_END")) {
+                                            continue_list = false;
+                                        } else {
+                                            System.out.println(line);
+                                            System.out.println("-----------------------------------------------------");
+                                        }
+
+                                    }
+                                    break;
+
+
+                                //---------------------------
+                                case "C":
+                                    String my_alphabet_city = selected_city.toLowerCase();
+                                    pw.println("ORD_ALPH_START");
+                                    pw.flush();
+                                    pw.println("ORD_ALPH_END");
+                                    pw.flush();
+                                    //invio la città
+                                    pw.println(my_alphabet_city);
+                                    pw.flush();
+                                    //ricevo la lunghezza dell'array hotel
+                                    boolean continue_list_alphabet = true;
+                                    while (continue_list_alphabet) {
+                                        String line = sc.nextLine();
+                                        if (line.equals("LIST_ALPH_DATA_END")) {
+                                            continue_list_alphabet = false;
+                                        } else {
+                                            System.out.println(line);
+                                            System.out.println("-----------------------------------------------------");
+                                        }
+
+                                    }
+                                    break;
+                                default:
+                                    System.out.println("Choise not valid!");
+
+
                             }
-                        }
-                    case "4":
+
+            }break;
+
+                        //--------------------------
+                    case "3":
                         ArrayList<Hotel>rating= new ArrayList<>();
                         System.out.println("Show us your experience!");
                         System.out.println("Find an hotel. Give the city:");
@@ -320,10 +336,28 @@ public class Client
 
 
                         }break;
-                    case "3":
+                    case "4":
+                        //Booking
+                        //I ask to the user the ID of the hotel I wanna book
+                        //Client send ID to Server and us the hotel I booked
+                        int ID_booking;
+                        System.out.println("BOOKING!");
+                        System.out.println("Choise the ID:");
+                        ID_booking= input.nextInt();
+                        pw.println("BOOK_CMD_START");
+                        pw.flush();
+                        pw.println("BOOK_CMD_END");
+                        pw.flush();
+                        pw.println(ID_booking);
+                        pw.flush();
+                        String hotel_booked=sc.nextLine();
+                        System.out.println(hotel_booked + " has been booked!");
+
 
                 break;
-                }}
+                }
+
+            }
         }catch(IOException e)
         {
             System.out.println("Cannot connect to "+ip);

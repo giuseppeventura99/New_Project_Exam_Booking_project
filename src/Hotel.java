@@ -66,15 +66,10 @@ public class Hotel implements Comparable<Hotel>
         return city;
     }
 
+
     @Override
     public String toString() {
-        return "Hotel{" +
-                "name='" + name + '\'' +
-                ", price=" + price +
-
-
-                ", city='" + city + '\'' +
-                '}';
+        return ID_booking + " | " +name + " | " + price + " | " + city + " | " + rate;
     }
 
     @Override
