@@ -19,4 +19,3 @@ public class Rate_Compare implements Comparator<Hotel>
         }
     }
 }
-

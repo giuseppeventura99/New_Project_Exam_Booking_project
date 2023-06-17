@@ -53,6 +53,10 @@ public class Person implements Serializable
         this.surname = surname;
     }
 
+    public String  getFullname(){
+         return this.name.concat(this.surname);
+    }
+
     public void setAge(int age) {
         this.age = age;
     }

@@ -15,6 +15,7 @@ public class Client
     //let'so to add a new user!
     //so I need to an IP numeber and port
     public static void main(String[] args) {
+
         if (args.length!= 2) {
             System.out.println("Error , wrong number of arguments! use IP and PORT");
             System.exit(-1);
@@ -34,61 +35,17 @@ public class Client
             var pw = new PrintWriter(os);
             var input = new Scanner(System.in);
             String choose ="";
-            ArrayList<Hotel> list_hotel= new ArrayList<Hotel>();
-            list_hotel.add( new Hotel("Hotel Catalunya",60.99,"alghero",1,1));
-            list_hotel.add(new Hotel("Hotel Carolos V",70.99,"alghero",02,1));
-            list_hotel.add(new Hotel("Hotel Turin",69.99,"aosta",2,1));
-            list_hotel.add(new Hotel("Grande Albergo delle Nazioni",50.99,"bari",3,1));
-            list_hotel.add( new Hotel("Hotel Metropolitan",50.10,"bologna",4,1));
-            list_hotel.add( new Hotel("Hotel Dall'Ara",79.99,"bologna",5,1));
-            list_hotel.add( new Hotel("Hotel Sardegna",49.99,"cagliari",6,1));
-            list_hotel.add( new Hotel("Hotel Regina Margherita",99.99,"cagliari",7,1));
-            list_hotel.add( new Hotel("Hotel Nettuno",45.99,"catania",8,1));
-            list_hotel.add( new Hotel("Hotel Brunelleschi",100.99,"firenze",9,1));
-            list_hotel.add( new Hotel("Hotel Continentale",89.99,"firenze",10,1));
-            list_hotel.add( new Hotel("Hotel Dante",79.99,"firenze",11,1));
-            list_hotel.add( new Hotel("Hotel Bristol Palace",60.00,"genova",12,1));
-            list_hotel.add(new Hotel("Hotel Risorgimento Palace",50.00,"lecce",13,1));
-            list_hotel.add( new Hotel("Hotel Brera",100.00,"milano",14,1));
-            list_hotel.add(new Hotel("Hotel Milano Scala",120.99,"milano",15,1));
-            list_hotel.add(new Hotel( "Excelsior Hotel Gallia",130.99,"milano",16,1));
-            list_hotel.add( new Hotel("Hotel De Laurentis",80.99,"napoli",17,1));
-            list_hotel.add( new Hotel("Grand Hotel Vesuvio",79.99,"napoli",18,1));
-            list_hotel.add( new Hotel("Hotel Romeo",99.99,"napoli",19,1));
-            list_hotel.add( new Hotel("Hotel Brufani Palace",100.00,"perugia,",20,1));
-            list_hotel.add( new Hotel("Hotel de Londres",48.99,"rimini",21,1));
-            list_hotel.add(new Hotel("Grand Hotel Rimini",71.99,"rimini",22,1));
-            list_hotel.add( new Hotel("Hotel Colosseo",119.99,"roma",23,1));
-            list_hotel.add( new Hotel("Hotel Hassler",150.99,"roma",24,1));
-            list_hotel.add(new Hotel("Hotel Eden",140.00,"roma",25,1));
-            list_hotel.add(new Hotel("Hotel Parioli",170.99,"roma",26,1));
-            list_hotel.add( new Hotel("Hotel Agnelli",78.95,"torino",27,1));
-            list_hotel.add( new Hotel("Hotel Turin Palace",98.95,"torino",28,1));
-            list_hotel.add( new Hotel("Grand Hotel Trento",50.00,"trento",29,1));
-            list_hotel.add( new Hotel("Hotel Danieli",190.99,"venezia",30,1));
-            list_hotel.add( new Hotel("Hotel Palazzo Barbarigo",210.99,"venezia",31,1));
-            list_hotel.add( new Hotel("Hotel Venezia",180.00,"venezia",32,1));
-            list_hotel.add( new Hotel("Hotel Romeo-Giulietta",140.00,"verona",33,1));
-            list_hotel.add( new Hotel("Hotel Due Torri",168.99,"verona",35,1));
-            //I've to add hotel list
-           /* for(Hotel h: list_hotel)
-            {
-                pw.println(h);
-                pw.flush();
-            }*/
-           // pw.println("end_hotel_list");
-            //pw.flush();//segnalo la fine dell'array
-            //comando per dire che l'array è stato ricevuto
-            //String received_hotel_list= input.nextLine();
-            System.out.println("Iniziamo!");
-
-
+            System.out.println("Let's go!");
             //we can create the MENU
+            ArrayList<Hotel> list_hotel= new ArrayList<>();
+            //metodo per acquisire la lista
+
+            //-----------------------------
             while(!choose.equals("q")) {
                 System.out.println("1-Add an user:");
-                System.out.println("2-Book an Hotel");
-                System.out.println("3-List of users");
-                System.out.println("4-Show us your expericence");
+                System.out.println("2-List of hotel");
+                System.out.println("3-Show us your expericence");
+                System.out.println("4-Book a hotel");
                 System.out.println("q-Exit");
                 System.out.println("------------------------------------------------");
                 System.out.println("Select you choose:");
@@ -101,32 +58,33 @@ public class Client
                         System.out.println("L-Login" + "R-Register");
                         l_or_r = input.nextLine();
                         if (l_or_r.equals("L")) {
-                            //login
-                            //you can enter
-                            //and bring me to the menu
-                            //I am checking that I am here
+                            pw.println("CMD_ADD_Login");
+                            pw.flush();
                             System.out.println("Name:");
-                            var nome = input.nextLine();
+                            var name = input.nextLine();
+                            pw.println(name);
+                            pw.flush();
                             System.out.println("Surname :");
-                            var cognome = input.nextLine();
+                            var surname = input.nextLine();
+                            pw.println(surname);
+                            pw.flush();
                             System.out.println("Password:");
-                            var keyword = input.nextLine();
-
+                            var password = input.nextLine();
+                            pw.println(password);
+                            pw.flush();
+                            pw.println("CMD_END_Login");
+                            pw.flush();
                             //HANIF PART
                             /* I wanna check if the user is inside or not!
-
                             The objective of this part is to write a code so that the program can  recognize the name,
-
                             surname and keyword that the client, in the registration part, sent to the server.
                             So they should return name, surname and password from the server to the client and match them
                             to the instances just requested from the user and which are typed from the keyboard.
                              If there is equality, the program goes on and the menu reappears, otherwise the program
                              says that the user is  not registered and that he must register
                              I need a code in both the Client class and the Server class.
-
                              */
                         } else if (l_or_r.equals("R")) {//register
-
                             pw.println("CMD_ADD_START");
                             pw.flush();
                             System.out.println("Name:");
@@ -149,22 +107,26 @@ public class Client
                             String ID = input.nextLine();
                             pw.println(ID);
                             pw.flush();
-                            //I wanna create a random password that Hotel gives to the user
-                            /*
                             Random random = new Random();
                             int password = random.nextInt(90000) + 10000;
-                            System.out.println("Password User is: " + password + " " + name + surname);
-                            //converto un intero in una stringa
                             String passwordString = String.valueOf(password);
-                            OutputStream outputStream = socket.getOutputStream();
-                            outputStream.write(passwordString.getBytes());
-                            outputStream.close();
-
-                             */
+                            pw.println(passwordString);
+                            pw.flush();
+                            System.out.println("Password User is: " + passwordString + " Username is : " + name + surname);
+                            System.out.println("********************************************************");
                             pw.println("CMD_ADD_END");
                             pw.flush();
+                            break;
+                            //I wanna create a random password that Hotel gives to the user
+                            /*
+                            //converto un intero in una stringa
+                            /*OutputStream outputStream = socket.getOutputStream();
+                            outputStream.write(passwordString.getBytes());
+                            outputStream.close();
+                             */
                         } else {
                             System.out.println("Choise not recognized.Try more");
+                            break;
                         }
                     case "2":
                         //booking hotel
@@ -180,162 +142,213 @@ public class Client
                         //Order from the lowest stars to the highest ones
 
                          */
+                        //funzione che chiede al server di darmi una lista di hotel
                         System.out.println("Choose one of these cities:");
-
                         System.out.println("Alghero\nAosta\nBari\nBologna\nCagliari\nCatania\nFirenze\nGenova\nLecce\nMilano\nNapoli\nPerugia\nRimini\nRoma\nTorino\nTrento\nVenezia\nVerona");
                         String selected_city = "";
                         System.out.println("Choose a city:");
                         selected_city = input.nextLine();
-                       // if (selected_city.equals("Alghero") || selected_city.equals("ALGHERO") || selected_city.equals("alghero")) {
-
-                           // String our_city = "alghero";
+                        // if (selected_city.equals("Alghero") || selected_city.equals("ALGHERO") || selected_city.equals("alghero")) {
+                        // String our_city = "alghero";
                         String menu_choise = "";
                         System.out.println("Discover " + selected_city + " hotels!");
                         while(!choose.equals("q")) {
                             System.out.println("A-hotel list:");
                             System.out.println("B-From the lower price to the highter:");
                             System.out.println("C-Alphabetical Order");
-                            System.out.println("D-Book an hotel");
+                            /*System.out.println("D-Book an hotel");*/
                             System.out.println("q-Exit");
                             System.out.println("------------------------------------------------");
                             System.out.println("Make your choise:");
                             menu_choise = input.nextLine();
-                            switch(menu_choise)
-                            {
+                            switch (menu_choise) {
                                 case "A":
-                                    for (Hotel h : list_hotel)
-                                    {
-                                        if(selected_city.toLowerCase().equals(h.getCity()))
-                                            System.out.println(" " +h.getID_booking()+ " "+h.getName()+" "+h.getPrice()+" "+h.getCity());
+                                    //chiedo al server l'array di hotel della città che ho scelto
+                                    var my_city = selected_city.toLowerCase();
+                                    int dim;
+                                    pw.println("CMD_LIST_START");
+                                    pw.flush();
+                                    pw.println("CMD_LIST_END");
+                                    pw.flush();
+                                    //invio la città
+                                    pw.println(my_city);
+                                    pw.flush();
+                                    //ricevo la lunghezza dell'array hotel
+                                    dim = sc.nextInt();
+                                    //la stampo
+                                    System.out.print(dim);
+                                    boolean continue_list = true;
+                                    while (continue_list) {
+                                        String line = sc.nextLine();
+                                        if (line.equals("LIST_DATA_END")) {
+                                            continue_list = false;
+                                        } else {
+                                            System.out.println(line);
+                                            System.out.println("-----------------------------------------------------");
+                                        }
+
                                     }
                                     break;
                                 case "B":
-                                    Collections.sort(list_hotel);
-                                    for (Hotel h : list_hotel) {
-                                        if(selected_city.toLowerCase().equals(h.getCity()))
-                                            System.out.println(" " +h.getID_booking()+ " "+h.getName()+" "+h.getPrice()+" "+h.getCity());}
+                                    System.out.println("From lowest to highest price...");
+                                    System.out.println("  ");
+                                    String my_price_city = selected_city.toLowerCase();
+                                    pw.println("ORD_PRICE_START");
+                                    pw.flush();
+                                    pw.println("ORD_PRICE_END");
+                                    pw.flush();
+                                    //invio la città
+                                    pw.println(my_price_city);
+                                    pw.flush();
+                                    //ricevo la lunghezza dell'array hotel
+                                    dim = sc.nextInt();
+                                    //la stampo
+                                    System.out.print(dim);
+                                    boolean continue_list_price = true;
+                                    while (continue_list_price) {
+                                        String line = sc.nextLine();
+                                        if (line.equals("LIST_PRICE_DATA_END")) {
+                                            continue_list_price = false;
+                                        } else {
+                                            System.out.println(line);
+                                            System.out.println("-----------------------------------------------------");
+                                        }
+                                    }
                                     break;
                                 case "C":
-                                    Ordina_Alfabetico comparator_name = new Ordina_Alfabetico();
-                                    Collections.sort(list_hotel, comparator_name);
-                                    for (Hotel h : list_hotel) {
-                                        if(selected_city.toLowerCase().equals(h.getCity()))
-                                            System.out.println(" " +h.getID_booking()+ " "+h.getName()+" "+h.getPrice()+" "+h.getCity());}
-
+                                    String my_alphabet_city = selected_city.toLowerCase();
+                                    pw.println("ORD_ALPH_START");
+                                    pw.flush();
+                                    pw.println("ORD_ALPH_END");
+                                    pw.flush();
+                                    //invio la città
+                                    pw.println(my_alphabet_city);
+                                    pw.flush();
+                                    //ricevo la lunghezza dell'array hotel
+                                    boolean continue_list_alphabet = true;
+                                    while (continue_list_alphabet) {
+                                            String Alpha_line = sc.nextLine();
+                                            if (Alpha_line.equals("LIST_ALPH_DATA_END")) {
+                                                continue_list_alphabet = false;
+                                            } else {
+                                                System.out.println(Alpha_line);
+                                                System.out.println("-----------------------------------");
+                                            }
+                                    }
                                     break;
-                                case "D":
-                                    int ID_hotel;
-                                    System.out.println("Digit an ID:");
-                                    ID_hotel = input.nextInt();
-                                    // for (Hotel h : list_hotel) {
-                                        //  h.Booking(ID_hotel);}
-                                    pw.println("booking_command_start");
-                                    pw.flush();
-                                    pw.println(selected_city);
-                                    pw.flush();
-                                    pw.println(ID_hotel);
-                                    pw.flush();
-                                    pw.println("booking_command_end");
+                                case "q":
+                                    pw.println("CMD_QUIT");
                                     pw.flush();
                                     break;
-                            };
+                                default:
+                                    System.out.println("Choise not valid!");
+                            }
                         }
-
-                        /*if (selected_city.equals("Aosta") || selected_city.equals("AOSTA") || selected_city.equals("aosta")) {
-                            String our_city = "aosta";
-                        }
-                        if (selected_city.equals("Bari") || selected_city.equals("BARI") || selected_city.equals("bari")) {
-                            String our_city = "bari";
-                        }
-                        if (selected_city.equals("Bologna") || selected_city.equals("BOLOGNA") || selected_city.equals("bologna")) {
-                            String our_city = "bologna";
-                        }
-                        if (selected_city.equals("Cagliari") || selected_city.equals("CAGLIARI") || selected_city.equals("cagliari")) {
-                            String our_city = "cagliari";
-                        }
-                        if (selected_city.equals("Catania") || selected_city.equals("CATANIA") || selected_city.equals("catania")) {
-                            String our_city = "catania";
-                        }
-                        if (selected_city.equals("Firenze") || selected_city.equals("FIRENZE") || selected_city.equals("firenze")) {
-                            String our_city = "firenze";
-                        }
-                        if (selected_city.equals("Genova") || selected_city.equals("GENOVA") || selected_city.equals("genova")) {
-                            String our_city = "genova";
-                        }
-                        if (selected_city.equals("Lecce") || selected_city.equals("LECCE") || selected_city.equals("lecce")) {
-                            String our_city = "lecce";
-                        }
-                        if (selected_city.equals("Milano") || selected_city.equals("milano") || selected_city.equals("MILANO")) {
-                            String our_city = "milano";
-                        }
-                        if (selected_city.equals("Napoli") || selected_city.equals("NAPOLI") || selected_city.equals("napoli")) {
-                            String our_city = "napoli";
-                        }
-                        if (selected_city.equals("Perugia") || selected_city.equals("PERUGIA") || selected_city.equals("perugia")) {
-                            String our_city = "perugia";
-                        }
-                        if (selected_city.equals("Rimini") || selected_city.equals("RIMINI") || selected_city.equals("rimini")) {
-                            String our_city = "rimini";
-                        }
-                        if (selected_city.equals("Roma") || selected_city.equals("ROMA") || selected_city.equals("roma")) {
-                            String our_city = "roma";
-                        }
-                        if (selected_city.equals("Torino") || selected_city.equals("TORINO") || selected_city.equals("torino")) {
-                            String our_city = "torino";
-                        }
-                        if (selected_city.equals("Trento") || selected_city.equals("TRENTO") || selected_city.equals("trento")) {
-                            String our_city = "trento";
-                        }
-                        if (selected_city.equals("Venezia") || selected_city.equals("VENEZIA") || selected_city.equals("venezia")) {
-                            String our_city = "venezia";
-                        }
-                        if (selected_city.equals("Verona") || selected_city.equals("VERONA") || selected_city.equals("verona")) {
-                            String our_city = "verona";
-                        */
+                        break;
                     case "3":
-                        //rate hotels
-                        //scrivi una recensione
-                        String city_name = " ";
-                        int rate;
-                        System.out.println("Write a city name:");
-                        city_name = input.nextLine();
-                        for (Hotel h : list_hotel) {
-                            h.show_hotels_by_city(city_name);
+                        ArrayList<Hotel>rating= new ArrayList<>();
+                        System.out.println("Show us your experience!");
+                        System.out.println("Find an hotel. Give the city:");
+                        var my_city=input.nextLine();
+                        //chiedo al server di inviarmi l'array
+                        pw.println("CMD_LIST_START");
+                        pw.flush();
+                        pw.println("END_LIST_CMD");
+                        pw.flush();
+                        pw.println(my_city);
+                        pw.flush();
+                        int size = sc.nextInt();
+                        for(int i=0;i<size;i++)
+                        {
+                            var ID__hotel = sc.nextInt();
+                            System.out.print(ID__hotel);
+                            System.out.print("|");
+                            var name_hotel = sc.nextLine();
+                            System.out.print(name_hotel);
+                            System.out.print("|");
+                            var price_hotel = sc.nextDouble();
+                            System.out.print(price_hotel);
+                            System.out.print("|");
+                            var city_hotel = sc.nextLine();
+                            System.out.print(city_hotel);
+                            System.out.print("|");
+                            var rate_hotel = sc.nextInt();
+                            System.out.print(rate_hotel);
+                            System.out.print("|");
+                            //var rate_hotel= sc.nextLine();
+                            System.out.println("-------------------------");
+                            rating.add(new Hotel(name_hotel,price_hotel,city_hotel,ID__hotel,rate_hotel));
+
+
                         }
-                        int ID_rate;
-                        ID_rate = input.nextInt();
-                        System.out.println("Rate your chosen hotel(an integer number from 1 to 5):");
-                        rate = input.nextInt();
-                        pw.println("rate_command_start");
+                        //chiedo l'ID
+                        System.out.println("Give me the ID:");
+                        var ID_rating= input.nextInt();
+                        pw.println("CMD_RATE_START");
                         pw.flush();
-                        pw.println(ID_rate);
+                        pw.println("CMD_RATE_END");
                         pw.flush();
-                        pw.println(rate);
+                        pw.println(ID_rating);
                         pw.flush();
-                        pw.println("rate_command_end");
+                        for(Hotel h: rating)
+                        {
+                            if(ID_rating==h.getID_booking())
+                            {
+                                //ok.Ora metto un voto
+                                System.out.println("Give a rate:");
+                                var new_rate = input.nextInt();
+                                h.setRate(new_rate);
+                                pw.println(new_rate);
+                                pw.flush();
+
+                            }
+                            else
+                            {System.out.println("ID not founded");
+                            }
+
+
+                            System.out.println("Updated list:");
+                            Rate_Compare rateCompare = new Rate_Compare();
+                            Collections.sort(rating,rateCompare);
+                            //stampo il nuovo array di hotel
+                            for(Hotel r:rating)
+                            {
+                                System.out.print(h.getID_booking());
+                                System.out.print("|");
+                                System.out.print(h.getName());
+                                System.out.print("|");
+                                System.out.print(h.getPrice());
+                                System.out.print("|");
+                                System.out.print(h.getCity());
+                                System.out.print("|");
+                                System.out.print(h.getRate());
+                                System.out.println("|");
+                                System.out.println("---------------------------");
+                            }
+                            //ora posso dare il voto cambiato alla lista
+                        }
+                        break;
+                    case "4" :
+                        //Booking
+                        //I ask to the user the ID of the hotel I wanna book
+                        //Client send ID to Server and us the hotel I booked
+                        int ID_booking;
+                        System.out.println("BOOKING!");
+                        System.out.println("Choise the ID:");
+                        ID_booking= input.nextInt();
+                        pw.println("BOOK_CMD_START");
+                        pw.flush();
+                        pw.println("BOOK_CMD_END");
+                        pw.flush();
+                        pw.println(ID_booking);
+                        pw.flush();
+                        String hotel_booked=sc.nextLine();
+                        System.out.println(hotel_booked + " has been booked!");
+                        break;
+                    case "q":
+                        pw.println("CMD_QUIT");
                         pw.flush();
                         break;
-                    case "4":
-                        //print all the hotels in order by the rate
-                        pw.println("order_list_command_start");
-                        pw.flush();
-                        pw.println("order_list_command_end");
-                        pw.flush();
-                        boolean boolean_variable = true;
-                        System.out.println("*****************************************************");
-                        System.out.println("Most rated hotels");
-                        System.out.println("----------------------------------------------------");
-                        while (boolean_variable) {
-                            String row = sc.nextLine();
-                            if (row.equals("END_ORDER_ARRAY")) {
-                                boolean_variable = false;
-                            }
-                            else {
-                                System.out.println(row);
-                                System.out.println("-----------------------------------------------------");
-                            }
-                            System.out.println("*****************************************************");
-                        }
                 }
             }
         }catch(IOException e)

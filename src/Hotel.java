@@ -5,9 +5,9 @@ public class Hotel implements Comparable<Hotel>
 
     public String city;
     public int ID_booking;
-    double rate;
+    int rate;
 
-    public Hotel(String name, double price, String city, int ID_booking,double rate) {
+    public Hotel(String name, double price, String city, int ID_booking,int rate) {
         this.name = name;
         this.price = price;
         this.city = city;
@@ -38,23 +38,23 @@ public class Hotel implements Comparable<Hotel>
 
 
     //metodo per prenotare
-    public void Booking(int selected_ID)
+    public void Booking(String user_name,String user_surname,int selected_ID)
     {
         if(this.getID_booking()==selected_ID)
 
         {
             //allora dico che una stanza in questo albergo è stata prenotata
-            System.out.println("A room in the hotel"+this.getName()+" has been booked");
+            System.out.println(  user_name+ " "+user_surname+ " booked a room in "+this.getName()+" ");
 
         }
     }
 
-    public void setRate(double rate) {
+    public void setRate(int rate) {
         this.rate = rate;
     }
 
 
-    public double getRate() {
+    public int getRate() {
         return rate;
     }
 
@@ -68,13 +68,7 @@ public class Hotel implements Comparable<Hotel>
 
     @Override
     public String toString() {
-        return "Hotel{" +
-                "name='" + name + '\'' +
-                ", price=" + price +
-
-
-                ", city='" + city + '\'' +
-                '}';
+        return ID_booking + " | " +name + " | " + price + " | " + city + " | " + rate;
     }
 
     @Override
