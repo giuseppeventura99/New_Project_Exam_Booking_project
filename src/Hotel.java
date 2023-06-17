@@ -66,6 +66,7 @@ public class Hotel implements Comparable<Hotel>
         return city;
     }
 
+
     @Override
     public String toString() {
         return ID_booking + " | " +name + " | " + price + " | " + city + " | " + rate;
