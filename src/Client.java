@@ -46,6 +46,7 @@ public class Client
                 System.out.println("2-List of hotel");
                 System.out.println("3-Show us your experience");
                 System.out.println("4-Book a hotel");
+                System.out.println("5-List of booked hotels");
                 System.out.println("q-Exit");
                 System.out.println("------------------------------------------------");
                 System.out.println("Select you choose:");
@@ -296,6 +297,27 @@ public class Client
                         }
                         break;
 
+                    case "5":
+                        System.out.println("ALL BOOKING OF OUR AGENCY");
+                        pw.println("READ_LIST_START");
+                        pw.flush();
+                        pw.println("READ_LIST_END");
+                        pw.flush();
+                        boolean continue_list_read = true;
+                        while (continue_list_read) {
+                            String line = sc.nextLine();
+                            if (line.equals("READ_DATA_END")) {
+                                continue_list_read = false;
+                            } else {
+                                System.out.println(line);
+                                System.out.println("-----------------------------------------------------");
+                            }
+
+                        }
+
+
+
+
 
                     case "4":
                         //Booking
@@ -308,15 +330,16 @@ public class Client
                         pw.println("BOOK_CMD_END");
                         pw.flush();
                         System.out.println("Choise a city:");
-                        String booking__city = sc.nextLine();
+                        String booking__city = input.nextLine();
                         String booking_city= booking__city.toLowerCase();
                         pw.println(booking_city);
                         pw.flush();
+                        String prova_persona=sc.nextLine();
                         //show array
                         boolean continue_list_booking = true;
                         while (continue_list_booking) {
                             String line = sc.nextLine();
-                            if (line.equals("LIST_BOOK_DATA_UP")) {
+                            if (line.equals("LIST_BOOK_DATA_END")) {
                                 continue_list_booking = false;
                             } else {
                                 System.out.println(line);
@@ -331,7 +354,8 @@ public class Client
                         pw.println(ID_booking);
                         pw.flush();
                         String hotel_booked = sc.nextLine();
-                        System.out.println(hotel_booked + " has been booked!");
+                        System.out.println(prova_persona + " just booked a room in " + hotel_booked);
+
                 }
 
 

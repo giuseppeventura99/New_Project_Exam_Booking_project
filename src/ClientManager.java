@@ -55,6 +55,8 @@ class ClientManager implements Runnable {
             list_hotel.add( new Hotel("Hotel Venezia",180.00,"venezia",32,1));
             list_hotel.add( new Hotel("Hotel Romeo-Giulietta",140.00,"verona",33,1));
             list_hotel.add( new Hotel("Hotel Due Torri",168.99,"verona",35,1));
+            var prova_persona=new Person("","",1," ","","");
+            ArrayList<String> ultimate_list= new ArrayList<>();
             //funzione che deve inviare un array al client
             String received_command = "";
             while (!received_command.equals("CMD_QUIT")) {
@@ -75,8 +77,14 @@ class ClientManager implements Runnable {
                         }
                         System.out.println("New user credentials: "+name+" "+surname+" " +nationality+" - "+ ID);
                         System.out.println(passwordString);
-                        var someone = new Person(name,surname,Integer.parseInt(age),nationality,ID,passwordString);
-                        my_server.commandAddPerson(someone);
+                        prova_persona.setName(name);
+                        prova_persona.setSurname(surname);
+                        prova_persona.setAge(Integer.parseInt(age));
+                        prova_persona.setNationality(nationality);
+                        prova_persona.setID(ID);
+                        prova_persona.setPassword(passwordString);
+
+
                         break;
                     case "CMD_ADD_Login":
                         var username = sc.nextLine();
@@ -96,9 +104,15 @@ class ClientManager implements Runnable {
                     case "CMD_QUIT":
                         System.out.println("Closing connection... ");
                         break;
+
+
                     case "BOOK_CMD_START":
                         end_cmd=sc.nextLine();
                         String booking_city= sc.nextLine();
+                        String person= prova_persona.reducedtoString();
+
+                        pw.println(person);
+                        pw.flush();
 
                         if(!end_cmd.equals("BOOK_CMD_END"))
                         {
@@ -114,16 +128,43 @@ class ClientManager implements Runnable {
 
                         pw.println(("LIST_BOOK_DATA_END"));
                         pw.flush();
-                        var booking_ID= sc.nextInt();
 
+                        int booking_ID= sc.nextInt();
 
                         for(Hotel h:list_hotel)
                         {
                             if (h.getID_booking() == booking_ID) {
                                 pw.println(h.name);
                                 pw.flush();
+                                h.AddReservedPerson(prova_persona);
+                                ultimate_list.add(h.OtherString());
+
+
                             }
-                        }break;
+                        }
+
+                        break;
+
+
+                        //lista di hotel
+                    case "READ_LIST_START":
+                        end_cmd=sc.nextLine();
+                        if(!end_cmd.equals("READ_LIST_END"))
+                        {
+                            System.out.println("Error in read list ");
+                        }
+                        else
+                        {
+                            for(String s:ultimate_list)
+                            {
+
+                                pw.println(s.replaceAll("\\[|\\]", ""));
+                                pw.flush();
+                            }
+                        }
+                        pw.println("READ_DATA_END");
+                        pw.flush();
+                        break;
 
 
                     case "CMD_LOAD":
@@ -151,6 +192,10 @@ class ClientManager implements Runnable {
                          */
 
                         break;
+
+
+
+
 
                     case "CMD_SAVE":
                         System.out.println("Saving list...");

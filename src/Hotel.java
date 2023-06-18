@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Hotel implements Comparable<Hotel>
 {
     public String name;
@@ -7,14 +9,31 @@ public class Hotel implements Comparable<Hotel>
     public int ID_booking;
     int rate;
 
-    public Hotel(String name, double price, String city, int ID_booking,int rate) {
+
+    public Hotel(String name, double price, String city, int ID_booking,int rate ) {
         this.name = name;
         this.price = price;
         this.city = city;
         this.ID_booking= ID_booking;
         this.rate=rate;
+
     }
 
+
+    //--------------------------
+    ArrayList<Person>reserved_people= new ArrayList<>();
+
+    public ArrayList<Person> getReserved_people() {
+        return reserved_people;
+    }
+
+    public void AddReservedPerson(Person person)
+    {
+        reserved_people.add(person);
+
+    }
+
+    //-------------------------
     public String getName() {
         return name;
     }
@@ -23,31 +42,6 @@ public class Hotel implements Comparable<Hotel>
         return price;
     }
 
-
-
-
-    //metodo per scrivere solo gli hotel di quella città
-    public  void show_hotels_by_city(String city_name)
-    {
-        if(this.getCity().equals(city_name))
-        {
-            System.out.println(" "+ this.getID_booking()+" - "+this.getName()+this.getPrice()+ " , "+ this.getCity() );
-        }
-
-    }
-
-
-    //metodo per prenotare
-    public void Booking(String user_name,String user_surname,int selected_ID)
-    {
-        if(this.getID_booking()==selected_ID)
-
-        {
-            //allora dico che una stanza in questo albergo è stata prenotata
-            System.out.println(  user_name+ " "+user_surname+ " booked a room in "+this.getName()+" ");
-
-        }
-    }
 
     public void setRate(int rate) {
         this.rate = rate;
@@ -67,9 +61,15 @@ public class Hotel implements Comparable<Hotel>
     }
 
 
+
     @Override
     public String toString() {
         return ID_booking + " | " +name + " | " + price + " | " + city + " | " + rate;
+    }
+
+    public String OtherString()
+    {
+        return ID_booking + " | " +name + " | " + price + " | " + city + " - "+ this.getReserved_people();
     }
 
     @Override
