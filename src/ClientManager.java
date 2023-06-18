@@ -96,23 +96,36 @@ class ClientManager implements Runnable {
                     case "CMD_QUIT":
                         System.out.println("Closing connection... ");
                         break;
-                    case "CMD_BOOKING_START":
-                        var selected_city= sc.nextLine();
-                        var booking_ID= sc.nextInt();
-                        var booking_end_command=sc.nextLine();
-                        if(!booking_end_command.equals("CMD_BOOKING_END"))
+                    case "BOOK_CMD_START":
+                        end_cmd=sc.nextLine();
+                        String booking_city= sc.nextLine();
+
+                        if(!end_cmd.equals("BOOK_CMD_END"))
                         {
                             System.out.println("Format error!");
                         }
                         System.out.println("Booking in progress...");
+                        for (Hotel h : list_hotel) {
+                            if (h.getCity().equals(booking_city)) {
+                                pw.println(h);
+                                pw.flush();
+                            }
+                        }
+
+                        pw.println(("LIST_BOOK_DATA_END"));
+                        pw.flush();
+                        var booking_ID= sc.nextInt();
+
+
                         for(Hotel h:list_hotel)
                         {
                             if (h.getID_booking() == booking_ID) {
-                                System.out.println("Hotel" + h.getID_booking() + " " + h.getName() + ", located in " + h.getCity() + ", has been booked");
-                                var somehotel = new Hotel(h.getName(), h.getPrice(), h.getCity(), h.getID_booking(), h.getRate());
-                                my_server.commandAddHotel(somehotel);
+                                pw.println(h.name);
+                                pw.flush();
                             }
-                        }
+                        }break;
+
+
                     case "CMD_LOAD":
                         System.out.println("Loading list...");
                         String file_to_load = sc.nextLine();
@@ -195,6 +208,66 @@ class ClientManager implements Runnable {
                         }
                         break;
 
+                        //----------------------
+                    case "CMD_RATE_START":
+                        end_cmd=sc.nextLine();
+                        String rate_city=sc.nextLine();
+                        if(!end_cmd.equals("CMD_RATE_END"))
+                        {
+                            System.out.println("Format Error in Rate case");
+                        }
+                        else
+                        {
+                            for(Hotel h: list_hotel)
+                            {
+                                if(h.getCity().equals(rate_city))
+                                {
+                                    System.out.println(h.name +"inserito");
+                                    pw.println(h);
+                                    pw.flush();
+                                }
+                            }
+                            pw.println("LIST_RATE_DATA_END");
+                            pw.flush();
+
+                            //ho appena fatto vedere all'utente l'array
+                            int rate_ID= sc.nextInt();
+                            int rate_hotel =sc.nextInt();
+                            System.out.println(rate_hotel);
+
+                            for(Hotel h: list_hotel)
+                            {
+                                if(h.ID_booking==rate_ID)
+                            {
+                                //I change this hotel's rate
+                                h.setRate(rate_hotel);
+
+
+                            }
+
+                            }
+                            //Show the update
+                            Rate_Compare rateCompare= new Rate_Compare();
+                            Collections.sort(list_hotel,rateCompare);
+                            for(Hotel h: list_hotel)
+                            {
+                                if(h.getCity().equals(rate_city))
+                                {
+                                    pw.println(h);
+                                    pw.flush();
+                                }
+                            }pw.println("LIST_RATE_DATA_UP");
+                            pw.flush();
+
+
+                        }//parentesi di else
+                        break;
+
+
+
+
+                    //---------------------------
+
 
                     case "ORD_ALPH_START":
                         end_cmd = sc.nextLine();
@@ -212,7 +285,7 @@ class ClientManager implements Runnable {
                             }
                             pw.println(("LIST_ALPH_DATA_END"));
                             pw.flush();
-                            break;
+
                         }
                     default:
                         if (!received_command.isBlank())
