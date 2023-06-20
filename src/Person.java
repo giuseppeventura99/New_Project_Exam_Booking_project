@@ -94,16 +94,13 @@ public class Person implements Serializable
 
     @Override
     public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", age=" + age +
-                ", Nationality='" + Nationality + '\'' +
-                ", ID='" + ID + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+        return name + " " + surname+ " - " + age + " - "+ Nationality ;
 
+    }
+    public String reducedtoString()
+    {
+        return name  +  surname;
+    }
 
 
     }
-}

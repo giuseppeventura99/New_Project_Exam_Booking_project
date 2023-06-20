@@ -44,8 +44,10 @@ public class Client
             while(!choose.equals("q")) {
                 System.out.println("1-Add an user:");
                 System.out.println("2-List of hotel");
-                System.out.println("3-Show us your expericence");
+                System.out.println("3-Show us your experience");
                 System.out.println("4-Book a hotel");
+                System.out.println("5-List of booked hotels");
+                System.out.println("6-Saving");
                 System.out.println("q-Exit");
                 System.out.println("------------------------------------------------");
                 System.out.println("Select you choose:");
@@ -152,7 +154,7 @@ public class Client
                         // String our_city = "alghero";
                         String menu_choise = "";
                         System.out.println("Discover " + selected_city + " hotels!");
-                        while(!choose.equals("q")) {
+                        while (!menu_choise.equals("q")) {
                             System.out.println("A-hotel list:");
                             System.out.println("B-From the lower price to the highter:");
                             System.out.println("C-Alphabetical Order");
@@ -236,119 +238,132 @@ public class Client
                                             }
                                     }
                                     break;
-                                case "q":
+                                /*case "q":
                                     pw.println("CMD_QUIT");
                                     pw.flush();
-                                    break;
+                                    break;*/
                                 default:
                                     System.out.println("Choise not valid!");
                             }
                         }
                         break;
                     case "3":
-                        ArrayList<Hotel>rating= new ArrayList<>();
                         System.out.println("Show us your experience!");
                         System.out.println("Find an hotel. Give the city:");
-                        var my_city=input.nextLine();
-                        //chiedo al server di inviarmi l'array
-                        pw.println("CMD_LIST_START");
-                        pw.flush();
-                        pw.println("END_LIST_CMD");
-                        pw.flush();
-                        pw.println(my_city);
-                        pw.flush();
-                        int size = sc.nextInt();
-                        for(int i=0;i<size;i++)
-                        {
-                            var ID__hotel = sc.nextInt();
-                            System.out.print(ID__hotel);
-                            System.out.print("|");
-                            var name_hotel = sc.nextLine();
-                            System.out.print(name_hotel);
-                            System.out.print("|");
-                            var price_hotel = sc.nextDouble();
-                            System.out.print(price_hotel);
-                            System.out.print("|");
-                            var city_hotel = sc.nextLine();
-                            System.out.print(city_hotel);
-                            System.out.print("|");
-                            var rate_hotel = sc.nextInt();
-                            System.out.print(rate_hotel);
-                            System.out.print("|");
-                            //var rate_hotel= sc.nextLine();
-                            System.out.println("-------------------------");
-                            rating.add(new Hotel(name_hotel,price_hotel,city_hotel,ID__hotel,rate_hotel));
-
-
-                        }
-                        //chiedo l'ID
-                        System.out.println("Give me the ID:");
-                        var ID_rating= input.nextInt();
                         pw.println("CMD_RATE_START");
                         pw.flush();
                         pw.println("CMD_RATE_END");
                         pw.flush();
+                        //I send to the server the rate_city
+                        String city = input.nextLine();
+                        String rate_city = city.toLowerCase();
+                        pw.println(rate_city);
+                        pw.flush();
+                        boolean continue_list_rate = true;
+                        while (continue_list_rate) {
+                            String line = sc.nextLine();
+                            if (line.equals("LIST_RATE_DATA_END")) {
+                                continue_list_rate = false;
+                            } else {
+                                System.out.println(line);
+                                System.out.println("-----------------------------------------------------");
+                            }
+
+                        }
+                        //I showed the list
+                        //I ask ID
+                        System.out.println("Give me the ID:");
+                        int ID_rating = input.nextInt();
                         pw.println(ID_rating);
                         pw.flush();
-                        for(Hotel h: rating)
-                        {
-                            if(ID_rating==h.getID_booking())
-                            {
-                                //ok.Ora metto un voto
-                                System.out.println("Give a rate:");
-                                var new_rate = input.nextInt();
-                                h.setRate(new_rate);
-                                pw.println(new_rate);
-                                pw.flush();
-
+                        System.out.println("Give a rate(from 1 to 5):");
+                        int rate_hotel = input.nextInt();
+                        pw.println(rate_hotel);
+                        pw.flush();
+                        System.out.println("The best " + rate_city + " hotels according to your experience");
+                        //the program show us the updated list
+                        boolean continue_list_updated = true;
+                        while (continue_list_updated) {
+                            String line = sc.nextLine();
+                            if (line.equals("LIST_RATE_DATA_UP")) {
+                                continue_list_updated = false;
+                            } else {
+                                System.out.println(line);
+                                System.out.println("-----------------------------------------------------");
                             }
-                            else
-                            {System.out.println("ID not founded");
-                            }
 
-
-                            System.out.println("Updated list:");
-                            Rate_Compare rateCompare = new Rate_Compare();
-                            Collections.sort(rating,rateCompare);
-                            //stampo il nuovo array di hotel
-                            for(Hotel r:rating)
-                            {
-                                System.out.print(h.getID_booking());
-                                System.out.print("|");
-                                System.out.print(h.getName());
-                                System.out.print("|");
-                                System.out.print(h.getPrice());
-                                System.out.print("|");
-                                System.out.print(h.getCity());
-                                System.out.print("|");
-                                System.out.print(h.getRate());
-                                System.out.println("|");
-                                System.out.println("---------------------------");
-                            }
-                            //ora posso dare il voto cambiato alla lista
                         }
                         break;
-                    case "4" :
+
+                    case "5":
+                        System.out.println("ALL BOOKING OF OUR AGENCY");
+                        pw.println("READ_LIST_START");
+                        pw.flush();
+                        pw.println("READ_LIST_END");
+                        pw.flush();
+                        boolean continue_list_read = true;
+                        while (continue_list_read) {
+                            String line = sc.nextLine();
+                            if (line.equals("READ_DATA_END")) {
+                                continue_list_read = false;
+                            } else {
+                                System.out.println(line);
+                                System.out.println("-----------------------------------------------------");
+                            }
+                        }
+                       break;
+                    case "4":
                         //Booking
                         //I ask to the user the ID of the hotel I wanna book
                         //Client send ID to Server and us the hotel I booked
                         int ID_booking;
                         System.out.println("BOOKING!");
-                        System.out.println("Choise the ID:");
-                        ID_booking= input.nextInt();
                         pw.println("BOOK_CMD_START");
                         pw.flush();
                         pw.println("BOOK_CMD_END");
                         pw.flush();
+                        System.out.println("Choise a city:");
+                        String booking__city = input.nextLine();
+                        String booking_city= booking__city.toLowerCase();
+                        pw.println(booking_city);
+                        pw.flush();
+                        String prova_persona=sc.nextLine();
+                        //show array
+                        boolean continue_list_booking = true;
+                        while (continue_list_booking) {
+                            String line = sc.nextLine();
+                            if (line.equals("LIST_BOOK_DATA_END")) {
+                                continue_list_booking = false;
+                            } else {
+                                System.out.println(line);
+                                System.out.println("-----------------------------------------------------");
+                            }
+                        }
+
+                        //--------------
+
+                        System.out.println("Choise the ID:");
+                        ID_booking = input.nextInt();
                         pw.println(ID_booking);
                         pw.flush();
-                        String hotel_booked=sc.nextLine();
-                        System.out.println(hotel_booked + " has been booked!");
+                        String hotel_booked = sc.nextLine();
+                        System.out.println(prova_persona + " just booked a room in " + hotel_booked);
                         break;
-                    case "q":
-                        pw.println("CMD_QUIT");
+                    case "6":
+                        String file_name;
+                        System.out.println("Enter filename:");
+                        file_name = input.nextLine();
+                        pw.println("CMD_SAVE");
+                        pw.flush();
+                        pw.println(file_name);
+                        pw.flush();
+                        pw.println("END_CMD");
                         pw.flush();
                         break;
+                    /*case "q":
+                        pw.println("CMD_QUIT");
+                        pw.flush();
+                        break;*/
                 }
             }
         }catch(IOException e)

@@ -55,6 +55,8 @@ class ClientManager implements Runnable {
             list_hotel.add( new Hotel("Hotel Venezia",180.00,"venezia",32,1));
             list_hotel.add( new Hotel("Hotel Romeo-Giulietta",140.00,"verona",33,1));
             list_hotel.add( new Hotel("Hotel Due Torri",168.99,"verona",35,1));
+            var prova_persona=new Person("","",1," ","","");
+            ArrayList<String> ultimate_list= new ArrayList<>();
             //funzione che deve inviare un array al client
             String received_command = "";
             while (!received_command.equals("CMD_QUIT")) {
@@ -75,6 +77,12 @@ class ClientManager implements Runnable {
                         }
                         System.out.println("New user credentials: "+name+" "+surname+" " +nationality+" - "+ ID);
                         System.out.println(passwordString);
+                        prova_persona.setName(name);
+                        prova_persona.setSurname(surname);
+                        prova_persona.setAge(Integer.parseInt(age));
+                        prova_persona.setNationality(nationality);
+                        prova_persona.setID(ID);
+                        prova_persona.setPassword(passwordString);
                         var someone = new Person(name,surname,Integer.parseInt(age),nationality,ID,passwordString);
                         my_server.commandAddPerson(someone);
                         break;
@@ -96,24 +104,70 @@ class ClientManager implements Runnable {
                     case "CMD_QUIT":
                         System.out.println("Closing connection... ");
                         break;
-                    case "CMD_BOOKING_START":
-                        var selected_city= sc.nextLine();
-                        var booking_ID= sc.nextInt();
-                        var booking_end_command=sc.nextLine();
-                        if(!booking_end_command.equals("CMD_BOOKING_END"))
+
+
+                    case "BOOK_CMD_START":
+                        end_cmd=sc.nextLine();
+                        String booking_city= sc.nextLine();
+                        String person= prova_persona.reducedtoString();
+
+                        pw.println(person);
+                        pw.flush();
+
+                        if(!end_cmd.equals("BOOK_CMD_END"))
                         {
                             System.out.println("Format error!");
                         }
                         System.out.println("Booking in progress...");
+                        for (Hotel h : list_hotel) {
+                            if (h.getCity().equals(booking_city)) {
+                                pw.println(h);
+                                pw.flush();
+                            }
+                        }
+
+                        pw.println(("LIST_BOOK_DATA_END"));
+                        pw.flush();
+
+                        int booking_ID= sc.nextInt();
+
                         for(Hotel h:list_hotel)
                         {
                             if (h.getID_booking() == booking_ID) {
-                                System.out.println("Hotel" + h.getID_booking() + " " + h.getName() + ", located in " + h.getCity() + ", has been booked");
-                                var somehotel = new Hotel(h.getName(), h.getPrice(), h.getCity(), h.getID_booking(), h.getRate());
-                                my_server.commandAddHotel(somehotel);
+                                pw.println(h.name);
+                                pw.flush();
+                                h.AddReservedPerson(prova_persona);
+                                ultimate_list.add(h.OtherString());
+
+
                             }
                         }
-                    case "CMD_LOAD":
+
+                        break;
+
+
+                        //lista di hotel
+                    case "READ_LIST_START":
+                        end_cmd=sc.nextLine();
+                        if(!end_cmd.equals("READ_LIST_END"))
+                        {
+                            System.out.println("Error in read list ");
+                        }
+                        else
+                        {
+                            for(String s:ultimate_list)
+                            {
+
+                                pw.println(s.replaceAll("\\[|\\]", ""));
+                                pw.flush();
+                            }
+                        }
+                        pw.println("READ_DATA_END");
+                        pw.flush();
+                        break;
+
+
+                   /* case "CMD_LOAD":
                         System.out.println("Loading list...");
                         String file_to_load = sc.nextLine();
                         end_cmd  = sc.nextLine();
@@ -136,18 +190,22 @@ class ClientManager implements Runnable {
                         ois.close();
 
                          */
-
-                        break;
-
                     case "CMD_SAVE":
                         System.out.println("Saving list...");
-                        String filename = sc.nextLine();
+                        String file_name = sc.nextLine();
                         end_cmd  = sc.nextLine();
-                        if (!end_cmd.equals("END_CMD")) {
+                        if (!end_cmd.equals("SAVE_CMD")) {
                             System.out.println("Format error!");
                         }
-                        // my_server.commandSaveList(filename);
+                        var fos = new FileOutputStream(file_name);
+                        var oos = new ObjectOutputStream(fos);
+                        oos.writeObject(ultimate_list);
+                        oos.close();
                         break;
+
+
+
+
                     case "CMD_LIST_START":
                         end_cmd = sc.nextLine();
                         int dim = 0;
@@ -195,6 +253,66 @@ class ClientManager implements Runnable {
                         }
                         break;
 
+                        //----------------------
+                    case "CMD_RATE_START":
+                        end_cmd=sc.nextLine();
+                        String rate_city=sc.nextLine();
+                        if(!end_cmd.equals("CMD_RATE_END"))
+                        {
+                            System.out.println("Format Error in Rate case");
+                        }
+                        else
+                        {
+                            for(Hotel h: list_hotel)
+                            {
+                                if(h.getCity().equals(rate_city))
+                                {
+                                    System.out.println(h.name +"inserito");
+                                    pw.println(h);
+                                    pw.flush();
+                                }
+                            }
+                            pw.println("LIST_RATE_DATA_END");
+                            pw.flush();
+
+                            //ho appena fatto vedere all'utente l'array
+                            int rate_ID= sc.nextInt();
+                            int rate_hotel =sc.nextInt();
+                            System.out.println(rate_hotel);
+
+                            for(Hotel h: list_hotel)
+                            {
+                                if(h.ID_booking==rate_ID)
+                            {
+                                //I change this hotel's rate
+                                h.setRate(rate_hotel);
+
+
+                            }
+
+                            }
+                            //Show the update
+                            Rate_Compare rateCompare= new Rate_Compare();
+                            Collections.sort(list_hotel,rateCompare);
+                            for(Hotel h: list_hotel)
+                            {
+                                if(h.getCity().equals(rate_city))
+                                {
+                                    pw.println(h);
+                                    pw.flush();
+                                }
+                            }pw.println("LIST_RATE_DATA_UP");
+                            pw.flush();
+
+
+                        }//parentesi di else
+                        break;
+
+
+
+
+                    //---------------------------
+
 
                     case "ORD_ALPH_START":
                         end_cmd = sc.nextLine();
@@ -212,8 +330,9 @@ class ClientManager implements Runnable {
                             }
                             pw.println(("LIST_ALPH_DATA_END"));
                             pw.flush();
-                            break;
+
                         }
+                        break;
                     default:
                         if (!received_command.isBlank())
                             System.out.println("Unknown command");

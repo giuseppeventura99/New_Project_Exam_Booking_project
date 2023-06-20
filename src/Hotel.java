@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Hotel implements Comparable<Hotel>
 {
     public String name;
@@ -13,6 +15,21 @@ public class Hotel implements Comparable<Hotel>
         this.city = city;
         this.ID_booking= ID_booking;
         this.rate=rate;
+
+    }
+
+
+    //--------------------------
+    ArrayList<Person>reserved_people= new ArrayList<>();
+
+    public ArrayList<Person> getReserved_people() {
+        return reserved_people;
+    }
+
+    public void AddReservedPerson(Person person)
+    {
+        reserved_people.add(person);
+
     }
 
     public String getName() {
@@ -70,6 +87,11 @@ public class Hotel implements Comparable<Hotel>
     @Override
     public String toString() {
         return ID_booking + " | " +name + " | " + price + " | " + city + " | " + rate;
+    }
+
+    public String OtherString()
+    {
+        return ID_booking + " | " +name + " | " + price + " | " + city + " - "+ this.getReserved_people();
     }
 
     @Override
