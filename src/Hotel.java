@@ -7,17 +7,23 @@ public class Hotel implements Comparable<Hotel>
 
     public String city;
     public int ID_booking;
-    int rate;
+    double rate;
+    int number_rating;
+    String comment;
 
-    public Hotel(String name, double price, String city, int ID_booking,int rate) {
+
+
+    public Hotel(String name, double price, String city, int ID_booking, double rate, int number_rating, String comment) {
         this.name = name;
         this.price = price;
         this.city = city;
-        this.ID_booking= ID_booking;
-        this.rate=rate;
+        this.ID_booking = ID_booking;
+        this.rate = rate;
+        this.number_rating = number_rating;
+        this.comment=comment;
+
 
     }
-
 
     //--------------------------
     ArrayList<Person>reserved_people= new ArrayList<>();
@@ -32,6 +38,14 @@ public class Hotel implements Comparable<Hotel>
 
     }
 
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
     public String getName() {
         return name;
     }
@@ -43,15 +57,10 @@ public class Hotel implements Comparable<Hotel>
 
 
 
-    //metodo per scrivere solo gli hotel di quella città
-    public  void show_hotels_by_city(String city_name)
-    {
-        if(this.getCity().equals(city_name))
-        {
-            System.out.println(" "+ this.getID_booking()+" - "+this.getName()+this.getPrice()+ " , "+ this.getCity() );
-        }
+    public String StringConcatenation(String str1, String str2) {
 
-    }
+            return str1 + "|" +str2;
+        }
 
 
     //metodo per prenotare
@@ -66,17 +75,25 @@ public class Hotel implements Comparable<Hotel>
         }
     }
 
-    public void setRate(int rate) {
+
+    public void setRate(double rate) {
         this.rate = rate;
     }
 
-
-    public int getRate() {
+    public double getRate() {
         return rate;
     }
 
     public int getID_booking() {
         return ID_booking;
+    }
+
+    public int getNumber_rating() {
+        return number_rating;
+    }
+
+    public void setNumber_rating(int number_rating) {
+        this.number_rating = number_rating;
     }
 
     public String getCity() {
@@ -86,12 +103,16 @@ public class Hotel implements Comparable<Hotel>
 
     @Override
     public String toString() {
-        return ID_booking + " | " +name + " | " + price + " | " + city + " | " + rate;
+        return ID_booking + " | " +name + " | " + price + " | " + city + " | " + rate+ " Comments:"+comment+"";
     }
 
     public String OtherString()
     {
         return ID_booking + " | " +name + " | " + price + " | " + city + " - "+ this.getReserved_people();
+    }
+
+    public String PresentationString() {
+        return ID_booking + " | " +name + " | " + price + " | " + city ;
     }
 
     @Override

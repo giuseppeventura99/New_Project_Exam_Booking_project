@@ -20,41 +20,41 @@ class ClientManager implements Runnable {
             sc = new Scanner(client_socket.getInputStream());
             var pw = new PrintWriter(client_socket.getOutputStream());
             ArrayList<Hotel> list_hotel= new ArrayList<Hotel>();
-            list_hotel.add( new Hotel("Hotel Catalunya",60.99,"alghero",1,1));
-            list_hotel.add(new Hotel("Hotel Carolos V",70.99,"alghero",02,1));
-            list_hotel.add(new Hotel("Hotel Turin",69.99,"aosta",2,1));
-            list_hotel.add(new Hotel("Grande Albergo delle Nazioni",50.99,"bari",3,1));
-            list_hotel.add( new Hotel("Hotel Metropolitan",50.10,"bologna",4,1));
-            list_hotel.add( new Hotel("Hotel Dall'Ara",79.99,"bologna",5,1));
-            list_hotel.add( new Hotel("Hotel Sardegna",49.99,"cagliari",6,1));
-            list_hotel.add( new Hotel("Hotel Regina Margherita",99.99,"cagliari",7,1));
-            list_hotel.add( new Hotel("Hotel Nettuno",45.99,"catania",8,1));
-            list_hotel.add( new Hotel("Hotel Brunelleschi",100.99,"firenze",9,1));
-            list_hotel.add( new Hotel("Hotel Continentale",89.99,"firenze",10,1));
-            list_hotel.add( new Hotel("Hotel Dante",79.99,"firenze",11,1));
-            list_hotel.add( new Hotel("Hotel Bristol Palace",60.00,"genova",12,1));
-            list_hotel.add(new Hotel("Hotel Risorgimento Palace",50.00,"lecce",13,1));
-            list_hotel.add( new Hotel("Hotel Brera",130.00,"milano",14,1));
-            list_hotel.add(new Hotel("Hotel Milano Scala",150.99,"milano",15,1));
-            list_hotel.add(new Hotel( "Excelsior Hotel Gallia",100.99,"milano",16,1));
-            list_hotel.add( new Hotel("Hotel De Laurentis",80.99,"napoli",17,1));
-            list_hotel.add( new Hotel("Grand Hotel Vesuvio",79.99,"napoli",18,1));
-            list_hotel.add( new Hotel("Hotel Romeo",99.99,"napoli",19,1));
-            list_hotel.add( new Hotel("Hotel Brufani Palace",100.00,"perugia,",20,1));
-            list_hotel.add( new Hotel("Hotel de Londres",48.99,"rimini",21,1));
-            list_hotel.add(new Hotel("Grand Hotel Rimini",71.99,"rimini",22,1));
-            list_hotel.add( new Hotel("Hotel Virgilio",119.99,"roma",23,1));
-            list_hotel.add( new Hotel("Hotel Hassler",150.99,"roma",24,1));
-            list_hotel.add(new Hotel("Hotel Eden",140.00,"roma",25,1));
-            list_hotel.add(new Hotel("Hotel Parioli",170.99,"roma",26,1));
-            list_hotel.add( new Hotel("Hotel Agnelli",78.95,"torino",27,1));
-            list_hotel.add( new Hotel("Hotel Turin Palace",98.95,"torino",28,1));
-            list_hotel.add( new Hotel("Grand Hotel Trento",50.00,"trento",29,1));
-            list_hotel.add( new Hotel("Hotel Danieli",190.99,"venezia",30,1));
-            list_hotel.add( new Hotel("Hotel Palazzo Barbarigo",210.99,"venezia",31,1));
-            list_hotel.add( new Hotel("Hotel Venezia",180.00,"venezia",32,1));
-            list_hotel.add( new Hotel("Hotel Romeo-Giulietta",140.00,"verona",33,1));
-            list_hotel.add( new Hotel("Hotel Due Torri",168.99,"verona",35,1));
+            list_hotel.add( new Hotel("Hotel Catalunya",60.99,"alghero",1,0.0,1," "));
+            list_hotel.add(new Hotel("Hotel Carolos V",70.99,"alghero",02,0.0,1," "));
+            list_hotel.add(new Hotel("Hotel Turin",69.99,"aosta",2,0.0,1," "));
+            list_hotel.add(new Hotel("Grande Albergo delle Nazioni",50.99,"bari",3,0.0,1," "));
+            list_hotel.add( new Hotel("Hotel Metropolitan",50.10,"bologna",4,0.0,1," "));
+            list_hotel.add( new Hotel("Hotel Dall'Ara",79.99,"bologna",5,0.0,1," "));
+            list_hotel.add( new Hotel("Hotel Sardegna",49.99,"cagliari",6,0.0,1," "));
+            list_hotel.add( new Hotel("Hotel Regina Margherita",99.99,"cagliari",7,0.0,1," "));
+            list_hotel.add( new Hotel("Hotel Nettuno",45.99,"catania",8,0.0,1," "));
+            list_hotel.add( new Hotel("Hotel Brunelleschi",100.99,"firenze",9,0.0,1," "));
+            list_hotel.add( new Hotel("Hotel Continentale",89.99,"firenze",10,0.0,1," "));
+            list_hotel.add( new Hotel("Hotel Dante",79.99,"firenze",11,0.0,1," "));
+            list_hotel.add( new Hotel("Hotel Bristol Palace",60.00,"genova",12,0.0,1," "));
+            list_hotel.add(new Hotel("Hotel Risorgimento Palace",50.00,"lecce",13,0.0,1," "));
+            list_hotel.add( new Hotel("Hotel Brera",130.00,"milano",14,0.0,1," "));
+            list_hotel.add(new Hotel("Hotel Milano Scala",150.99,"milano",15,0.0,1, " "));
+            list_hotel.add(new Hotel( "Excelsior Hotel Gallia",100.99,"milano",16,0.0,1," "));
+            list_hotel.add( new Hotel("Hotel De Laurentis",80.99,"napoli",17,0.0,1," "));
+            list_hotel.add( new Hotel("Grand Hotel Vesuvio",79.99,"napoli",18,0.0,1," "));
+            list_hotel.add( new Hotel("Hotel Romeo",99.99,"napoli",19,0.0,1," "));
+            list_hotel.add( new Hotel("Hotel Brufani Palace",100.00,"perugia,",20,0.0,1," "));
+            list_hotel.add( new Hotel("Hotel de Londres",48.99,"rimini",21,0.0,1," "));
+            list_hotel.add(new Hotel("Grand Hotel Rimini",71.99,"rimini",22,0.0,1," "));
+            list_hotel.add( new Hotel("Hotel Virgilio",119.99,"roma",23,0.0,1," "));
+            list_hotel.add( new Hotel("Hotel Hassler",150.99,"roma",24,0.0,1," "));
+            list_hotel.add(new Hotel("Hotel Eden",140.00,"roma",25,0.0,1," "));
+            list_hotel.add(new Hotel("Hotel Parioli",170.99,"roma",26,0.0,1," "));
+            list_hotel.add( new Hotel("Hotel Agnelli",78.95,"torino",27,0.0,1," "));
+            list_hotel.add( new Hotel("Hotel Turin Palace",98.95,"torino",28,0.0,1," "));
+            list_hotel.add( new Hotel("Grand Hotel Trento",50.00,"trento",29,0.0,1," "));
+            list_hotel.add( new Hotel("Hotel Danieli",190.99,"venezia",30,0.0,1," "));
+            list_hotel.add( new Hotel("Hotel Palazzo Barbarigo",210.99,"venezia",31,0.0,1," "));
+            list_hotel.add( new Hotel("Hotel Venezia",180.00,"venezia",32,0.0,1," "));
+            list_hotel.add( new Hotel("Hotel Romeo-Giulietta",140.00,"verona",33,0.0,1," "));
+            list_hotel.add( new Hotel("Hotel Due Torri",168.99,"verona",35,0.0,1," "));
             var prova_persona=new Person("","",1," ","","");
             ArrayList<String> ultimate_list= new ArrayList<>();
             //funzione che deve inviare un array al client
@@ -76,6 +76,8 @@ class ClientManager implements Runnable {
                             System.out.println("Format error!");
                         }
                         System.out.println("New user credentials: "+name+" "+surname+" " +nationality+" - "+ ID);
+                       var persona= new Person(name,surname, Integer.parseInt(age),nationality,ID,passwordString);
+                       list_user.add(persona);
                         System.out.println(passwordString);
                         prova_persona.setName(name);
                         prova_persona.setSurname(surname);
@@ -83,19 +85,24 @@ class ClientManager implements Runnable {
                         prova_persona.setNationality(nationality);
                         prova_persona.setID(ID);
                         prova_persona.setPassword(passwordString);
-                        var someone = new Person(name,surname,Integer.parseInt(age),nationality,ID,passwordString);
-                        my_server.commandAddPerson(someone);
+
+
                         break;
                     case "CMD_ADD_Login":
                         var username = sc.nextLine();
+                        var usersurname= sc.nextLine();
                         var password = sc.nextLine();
                         var end_cmmd  = sc.nextLine();
-                        if (!end_cmmd.equals("CMD_ADD_END")) {
+                        if (!end_cmmd.equals("CMD_END_Login")) {
                             System.out.println("Format error!");
                         }
+
                         var isauth = my_server.checkAuthentication(username,password) ? my_server.checkAuthentication(username,password) : false;
                         if(isauth == true){
                             System.out.println("Successful Login");
+                            prova_persona.setName(username);
+                            prova_persona.setSurname(usersurname);
+
                             break;
                         }else{
                             System.out.println("Error Login");
@@ -167,7 +174,7 @@ class ClientManager implements Runnable {
                         break;
 
 
-                   /* case "CMD_LOAD":
+                    case "CMD_LOAD":
                         System.out.println("Loading list...");
                         String file_to_load = sc.nextLine();
                         end_cmd  = sc.nextLine();
@@ -190,22 +197,22 @@ class ClientManager implements Runnable {
                         ois.close();
 
                          */
-                    case "CMD_SAVE":
-                        System.out.println("Saving list...");
-                        String file_name = sc.nextLine();
-                        end_cmd  = sc.nextLine();
-                        if (!end_cmd.equals("SAVE_CMD")) {
-                            System.out.println("Format error!");
-                        }
-                        var fos = new FileOutputStream(file_name);
-                        var oos = new ObjectOutputStream(fos);
-                        oos.writeObject(ultimate_list);
-                        oos.close();
+
                         break;
 
 
 
 
+
+                    case "CMD_SAVE":
+                        System.out.println("Saving list...");
+                        String filename = sc.nextLine();
+                        end_cmd  = sc.nextLine();
+                        if (!end_cmd.equals("END_CMD")) {
+                            System.out.println("Format error!");
+                        }
+                        // my_server.commandSaveList(filename);
+                        break;
                     case "CMD_LIST_START":
                         end_cmd = sc.nextLine();
                         int dim = 0;
@@ -268,7 +275,7 @@ class ClientManager implements Runnable {
                                 if(h.getCity().equals(rate_city))
                                 {
                                     System.out.println(h.name +"inserito");
-                                    pw.println(h);
+                                    pw.println(h.PresentationString());
                                     pw.flush();
                                 }
                             }
@@ -278,19 +285,24 @@ class ClientManager implements Runnable {
                             //ho appena fatto vedere all'utente l'array
                             int rate_ID= sc.nextInt();
                             int rate_hotel =sc.nextInt();
+                            sc.nextLine();
+                            var my_comment= sc.nextLine();
                             System.out.println(rate_hotel);
+                            System.out.println(my_comment);
+                            double updated_rate;
+                            String updated_comment;
 
                             for(Hotel h: list_hotel)
                             {
                                 if(h.ID_booking==rate_ID)
                             {
+                                updated_rate= (((double)rate_hotel+h.getRate())/h.getNumber_rating());
                                 //I change this hotel's rate
-                                h.setRate(rate_hotel);
-
-
-                            }
-
-                            }
+                                h.setRate(updated_rate);
+                                updated_comment= h.getComment() + " , " + my_comment;
+                                h.setComment(updated_comment);
+                                h.number_rating++;
+                            }}
                             //Show the update
                             Rate_Compare rateCompare= new Rate_Compare();
                             Collections.sort(list_hotel,rateCompare);
@@ -301,19 +313,12 @@ class ClientManager implements Runnable {
                                     pw.println(h);
                                     pw.flush();
                                 }
-                            }pw.println("LIST_RATE_DATA_UP");
+                            }
+                            pw.println("LIST_RATE_DATA_UP");
                             pw.flush();
-
-
                         }//parentesi di else
                         break;
-
-
-
-
-                    //---------------------------
-
-
+                        //---------------------------
                     case "ORD_ALPH_START":
                         end_cmd = sc.nextLine();
                         String alph_city = sc.nextLine();
@@ -332,7 +337,6 @@ class ClientManager implements Runnable {
                             pw.flush();
 
                         }
-                        break;
                     default:
                         if (!received_command.isBlank())
                             System.out.println("Unknown command");
@@ -341,6 +345,7 @@ class ClientManager implements Runnable {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
 
     }
     @Override

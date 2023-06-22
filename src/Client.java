@@ -274,12 +274,22 @@ public class Client
                         //I ask ID
                         System.out.println("Give me the ID:");
                         int ID_rating = input.nextInt();
+                        input.nextLine(); // Consuma il carattere di nuova riga rimanente
                         pw.println(ID_rating);
                         pw.flush();
-                        System.out.println("Give a rate(from 1 to 5):");
+
+                        System.out.println("Give a rate (from 1 to 5):");
                         int rate_hotel = input.nextInt();
+                        input.nextLine(); // Consuma il carattere di nuova riga rimanente
                         pw.println(rate_hotel);
                         pw.flush();
+
+                        System.out.println("Leave a comment:");
+                       String my_comment= input.nextLine();
+                       pw.println(my_comment);
+                       pw.flush();
+
+
                         System.out.println("The best " + rate_city + " hotels according to your experience");
                         //the program show us the updated list
                         boolean continue_list_updated = true;
