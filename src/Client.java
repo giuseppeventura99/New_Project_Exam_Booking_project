@@ -1,9 +1,9 @@
 import java.io.*;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
-import java.util.Scanner;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -50,7 +50,7 @@ public class Client
                 System.out.println("6-Saving");
                 System.out.println("q-Exit");
                 System.out.println("------------------------------------------------");
-                System.out.println("Select you choose:");
+                System.out.println("Write your option:");
                 var InputCommand = input.nextLine();
                 switch (InputCommand) {
                     case "1":
@@ -274,12 +274,22 @@ public class Client
                         //I ask ID
                         System.out.println("Give me the ID:");
                         int ID_rating = input.nextInt();
+                        input.nextLine(); // Consuma il carattere di nuova riga rimanente
                         pw.println(ID_rating);
                         pw.flush();
-                        System.out.println("Give a rate(from 1 to 5):");
+
+                        System.out.println("Give a rate (from 1 to 5):");
                         int rate_hotel = input.nextInt();
+                        input.nextLine(); // Consuma il carattere di nuova riga rimanente
                         pw.println(rate_hotel);
                         pw.flush();
+
+                        System.out.println("Leave a comment:");
+                       String my_comment= input.nextLine();
+                       pw.println(my_comment);
+                       pw.flush();
+
+
                         System.out.println("The best " + rate_city + " hotels according to your experience");
                         //the program show us the updated list
                         boolean continue_list_updated = true;
@@ -307,7 +317,7 @@ public class Client
                             if (line.equals("READ_DATA_END")) {
                                 continue_list_read = false;
                             } else {
-                                System.out.println(line);
+                                System.out.println(line + "\n");
                                 System.out.println("-----------------------------------------------------");
                             }
                         }
@@ -322,7 +332,7 @@ public class Client
                         pw.flush();
                         pw.println("BOOK_CMD_END");
                         pw.flush();
-                        System.out.println("Choise a city:");
+                        System.out.println("Choose a city:");
                         String booking__city = input.nextLine();
                         String booking_city= booking__city.toLowerCase();
                         pw.println(booking_city);
@@ -339,15 +349,69 @@ public class Client
                                 System.out.println("-----------------------------------------------------");
                             }
                         }
-
+                       // pw.println("CMD_GET_ROOM_LIST");
+                       // pw.flush();
                         //--------------
-
-                        System.out.println("Choise the ID:");
+                        System.out.println("Choose the ID:");
                         ID_booking = input.nextInt();
                         pw.println(ID_booking);
                         pw.flush();
                         String hotel_booked = sc.nextLine();
-                        System.out.println(prova_persona + " just booked a room in " + hotel_booked);
+                        System.out.println("List of AVAILABLE ROOMS");
+                        boolean continue_list_Rooms = true;
+                        while(continue_list_Rooms){
+                            String line = sc.nextLine();
+                            if (line.equals("LIST_ROOM_DATA_END")) {
+                                continue_list_Rooms = false;
+                            } else {
+                                System.out.println(line);
+                                System.out.println("-------------------------------------------------------------------------------------------------");
+                            }
+                        }
+                        System.out.println("Enter The Reservation ID:");
+                        int Room_ID = input.nextInt();
+                        pw.println(Room_ID);
+                        pw.flush();
+                        System.out.println("From Date:");
+                        String FromDate = input.next();
+                        /*Date StartDate = null;
+                        if (FromDate != null && FromDate != ""){
+
+                            try {
+                                StartDate = new SimpleDateFormat("dd/MM/yyyy").parse(FromDate);
+                            } catch (ParseException e) {
+                                System.out.println(e.getMessage());
+                            }
+                        }*/
+                       // System.out.println(StartDate);
+                        System.out.println("To Date:");
+                        String ToDate = input.next();
+                       /* Date EndDate =null;
+                        System.out.println("here55");
+                        if (ToDate != null && ToDate != ""){
+                            System.out.println("here66");
+                            try {
+                                System.out.println("here77");
+                                EndDate = new SimpleDateFormat("dd/MM/yyyy").parse(ToDate);
+                                System.out.println("here88");
+                            } catch (ParseException e) {
+                                System.out.println(e.getMessage());
+                            }
+                        }
+                        System.out.println(EndDate);*/
+
+                        pw.println(FromDate);
+                        pw.println(ToDate);
+                        pw.flush();
+                        /* System.out.println("To Date: ");
+                        String date2 = input.nextLine();
+                        pw.println(date2);
+                        pw.flush();*/
+                        //pw.println((ID_booking));
+                        // pw.println((Room_ID));
+                         String Hotel_Room = sc.nextLine();
+                         System.out.println(Hotel_Room);
+                        //  System.out.println(prova_persona + " just booked a room number"+ Hotel_Room +  "in " + hotel_booked + "from this date" + "" + "" + "to date" + "" + "");
                         break;
                     case "6":
                         String file_name;

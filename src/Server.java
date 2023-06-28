@@ -1,15 +1,27 @@
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Date;
+import java.util.concurrent.ForkJoinPool;
 
 public class Server {
 
     private ArrayList<Person> list = new ArrayList<>();
     private ArrayList<Hotel>hotel_list= new ArrayList<>();
+    private ArrayList<Booking> Book_list = new ArrayList<Booking>();
+    private  ArrayList<Room> Room_list = new ArrayList<Room>();
     PeriodicPrinter pp = new PeriodicPrinter();
+
+    public synchronized ArrayList<Booking> getBook_list() {
+
+        var booking_list_copy = new ArrayList<Booking>(Book_list);
+        return booking_list_copy;
+    }
+
     public synchronized ArrayList<Person> getList() {
         // first solution to the concurrent modification exception potentially happening
         // in the client manager when doing the for loop for printing the list
@@ -25,6 +37,120 @@ public class Server {
             return false;
         }
     }
+
+    public  synchronized boolean HasAnyRoomReserved(String FromDate,String ToDate,int roomID){
+        //conversion startdate and enddate
+        Date StartDate = null;
+        var result = false;
+        System.out.println("The Server" + FromDate);
+        if (FromDate != null && FromDate != ""){
+
+            try {
+                StartDate = new SimpleDateFormat("dd/MM/yyyy").parse(FromDate);
+            } catch (ParseException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        Date EndDate = null;
+        if (ToDate != null && ToDate != ""){
+
+
+            try {
+                EndDate = new SimpleDateFormat("dd/MM/yyyy").parse(ToDate);
+            } catch (ParseException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        //for in booking list : startdate and enddate convert
+        for (Booking b  : getBook_list()){
+            if(b.RoomID != roomID){
+
+
+                result = false;
+            }
+            else {
+
+
+                Date B_StartDate = null;
+                if (b.StartDate != null && b.StartDate != ""){
+                    System.out.println("State5");
+
+                    try {
+                        B_StartDate = new SimpleDateFormat("dd/MM/yyyy").parse(b.StartDate);
+                    } catch (ParseException e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
+                Date B_EndDate = null;
+                if (b.EndDate != null && b.EndDate != ""){
+
+
+                    try {
+                        B_EndDate = new SimpleDateFormat("dd/MM/yyyy").parse(b.EndDate);
+                    } catch (ParseException e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
+                if((StartDate.compareTo(B_StartDate)  <= 0  && EndDate.compareTo(B_StartDate) <= 0 ) || (StartDate.compareTo(B_EndDate) >= 0 && EndDate.compareTo(B_EndDate) >= 0 )){
+
+
+                    result = false;
+                }
+                else {
+
+
+                    result = true;
+                    break;
+                }
+            }
+        }
+
+
+        return result;
+        // check the dates
+        //tow condition if stratdate entry > enddate of booklist  || startdare and endate entry <= start date booklist
+        // retern false --- room reserve nashode
+        // return true reserved
+
+    }
+
+    public synchronized String GetPersonName(String ID){
+        var result = "";
+       for(Person P : list){
+           if(ID == P.getID()){
+               result = P.getFullname();
+               break;
+           }
+       }
+       return  result;
+    }
+
+
+    public synchronized String GetHotelName(int ID){
+        var result = "";
+        for(Hotel H : hotel_list){
+            if(ID == H.ID_booking){
+                result = H.name;
+                break;
+            }
+        }
+        return  result;
+    }
+
+
+    public synchronized String GetRoomName(int ID){
+        var result = "";
+        for(Room R : Room_list){
+            if(ID == R.ID){
+                result = R.Title;
+                break;
+            }
+        }
+        return  result;
+    }
+
+
+
     public synchronized ArrayList<Hotel> get_Hotel_List() {
         // first solution to the concurrent modification exception potentially happening
         // in the client manager when doing the for loop for printing the list
@@ -65,8 +191,16 @@ public class Server {
     public synchronized void commandAddPerson(Person p) {
         list.add(p);
     }
-    public synchronized void commandAddHotel(Hotel h) {
-        hotel_list.add(h);
+
+    public synchronized  void commandAddRoomlist(ArrayList<Room> listRoom){
+        Room_list.addAll(listRoom);
+    }
+
+    public  synchronized  void commandAddBooking(Booking b){
+        Book_list.add(b);
+    }
+    public synchronized void commandAddHotel(ArrayList<Hotel>  h) {
+        hotel_list.addAll(h);
     }
 
     public synchronized void commandRemovePerson(Person p) {
